@@ -1,1 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 5: Zusatzversicherungen</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #d4a373;
+            background: #f8f9fa;
+        }
+        .quiz-option.selected {
+            background: #d4a373;
+            color: white;
+            border-color: #d4a373;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
 
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 5: Zusatzversicherungen</h1>
+        </header>
+
+        <main>
+            
+            <div class="info-box">
+                <strong>🎧 In diesem Schritt:</strong> Sie hören einen Beitrag über Grundversicherung und Zusatzversicherungen und notieren die wichtigsten Unterschiede.
+            </div>
+
+            <div class="task">
+                <h2>🎧 Audio anhören</h2>
+                <p><strong>Hören Sie sich den folgenden Beitrag über Krankenkassen an:</strong></p>
+                
+                <div style="margin:20px 0; padding:20px; background:#e3f2fd; border-radius:8px; text-align:center;">
+                    <p style="margin-bottom:15px;">Klicken Sie auf den Link, um das Audio zu öffnen:</p>
+                    <a href="https://drive.google.com/file/d/1oWjdOW1Und6uIHfQK3KAxbwuRMI6y2IV/view?usp=sharing" 
+                       target="_blank" 
+                       style="display:inline-block; background:#4CAF50; color:white; padding:15px 30px; border-radius:8px; text-decoration:none; font-weight:bold; transition:all 0.3s;">
+                        🎧 Audio öffnen
+                    </a>
+                    <p style="margin-top:15px; font-size:0.9em; color:#666;">
+                        <em>Tipp: Sie können das Audio mehrmals anhören und Pausen machen, um Notizen zu machen.</em>
+                    </p>
+                </div>
+            </div>
+
+            <div class="task">
+                <h2>📚 Grundversicherung vs. Zusatzversicherungen</h2>
+                <p>Zur Information - diese Themen werden im Audio behandelt:</p>
+                
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0;">
+                    <div style="background:#e8f5e9; padding:20px; border-radius:8px; border-left:4px solid #4CAF50;">
+                        <h3 style="color:#2e7d32; margin-bottom:15px;">Grundversicherung</h3>
+                        <ul style="line-height:1.8; margin-left:20px;">
+                            <li>Alle Kosten, die beim Arztbesuch entstehen, inkl. Laboruntersuchungen</li>
+                            <li>Vom Arzt verordnete und kassenpflichtige Medikamente</li>
+                            <li>Alle Kosten eines Spitalaufenthalts in der allgemeinen Abteilung</li>
+                            <li>Ausgewählte komplementärmedizinische Behandlungen</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background:#fff3e0; padding:20px; border-radius:8px; border-left:4px solid #ff9800;">
+                        <h3 style="color:#e65100; margin-bottom:15px;">Zusatzversicherungen (Auswahl)</h3>
+                        <ul style="line-height:1.8; margin-left:20px;">
+                            <li>Nicht pflichtige Medikamente</li>
+                            <li>Spitalaufenthalt ganze Schweiz</li>
+                            <li>Spitalaufenthalt in der halbprivaten oder privaten Abteilung</li>
+                            <li>Brillen/Kontaktlinsen</li>
+                            <li>Zahnbehandlungen</li>
+                            <li>Bade- und Erholungskuren</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag: Hörverstehen-Aufgaben</h2>
+                <p><strong>Bearbeiten Sie die Aufgaben während oder nach dem Hören des Audios.</strong></p>
+                <p><em>Das Aufgabenblatt erhalten Sie von Ihrer Lehrperson.</em></p>
+                
+                <div style="margin:20px 0; padding:20px; background:#fff3e0; border-radius:8px; border-left:4px solid #ff9800;">
+                    <strong>💡 Hinweis:</strong> Ihre Lehrperson wird Ihnen die Hörverstehen-Aufgaben verteilen. Notieren Sie Ihre Antworten auf dem Aufgabenblatt und übertragen Sie anschließend Ihre Ergebnisse in die Felder unten.
+                </div>
+                
+                <h3 style="margin-top:20px;">Ihre Notizen zum Hörverstehen:</h3>
+                <textarea id="hoerverstehen_notizen" rows="8" placeholder="Notieren Sie hier wichtige Punkte aus dem Audio..."></textarea>
+            </div>
+
+            <div class="task">
+                <h2>Vergleichstabelle ausfüllen</h2>
+                <p>Füllen Sie die folgende Tabelle basierend auf dem Audio aus:</p>
+                
+                <table style="margin-top:15px;">
+                    <tr>
+                        <th style="width:25%;">Aspekt</th>
+                        <th style="width:37.5%;">Grundversicherung</th>
+                        <th style="width:37.5%;">Zusatzversicherung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Pflicht?</strong></td>
+                        <td><input type="text" id="grund_pflicht" placeholder="Ja/Nein?"></td>
+                        <td><input type="text" id="zusatz_pflicht" placeholder="Ja/Nein?"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beispiel 1</strong></td>
+                        <td><textarea id="grund_beispiel1" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                        <td><textarea id="zusatz_beispiel1" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beispiel 2</strong></td>
+                        <td><textarea id="grund_beispiel2" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                        <td><textarea id="zusatz_beispiel2" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beispiel 3</strong></td>
+                        <td><textarea id="grund_beispiel3" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                        <td><textarea id="zusatz_beispiel3" rows="2" placeholder="Nennen Sie ein Beispiel..."></textarea></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="task">
+                <h2>💭 Ihre Reflexion</h2>
+                <p><strong>Würden Sie eine Zusatzversicherung abschließen? Warum / Warum nicht?</strong></p>
+                <textarea id="zusatz_reflexion" rows="5" placeholder="Begründen Sie Ihre Entscheidung..."></textarea>
+            </div>
+
+            <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 6</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            // Load all saved answers for this step
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function saveAndContinue() {
+            // Save all inputs on current page
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            // Mark step as completed
+            if (!progress.completedPoints.includes(5)) {
+                progress.completedPoints.push(5);
+                progress.currentPoint = 6;
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('✅ Schritt 5 abgeschlossen!');
+            window.location.href = 'index.html';
+        }
+
+        
+        
+        
+
+        // Auto-save on input change
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
