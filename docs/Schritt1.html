@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 1: Grundlagen & Begriffe</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #d4a373;
+            background: #f8f9fa;
+        }
+        .quiz-option.selected {
+            background: #d4a373;
+            color: white;
+            border-color: #d4a373;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 1: Grundlagen & Begriffe</h1>
+        </header>
+
+        <main>
+            
+            <div class="task">
+                <h2>Auftrag a) 💭 Erste Gedanken</h2>
+                <p>Nehmen wir an es ist Winter und Sie erwischen eine Grippe. Da Sie auch Fieber haben, gehen Sie zu Ihrer Ärztin um abzuchecken, ob alles normal verläuft. Sie werden gründlich untersucht und erhalten Medikamente, damit es Ihnen bald besser geht. Zur Sicherheit wird noch ein Bluttest gemacht um sicher zu gehen, dass Sie keine Entzündung haben.</p>
+                <p style="margin-top:15px;"><strong>Wenige Wochen später erhalten Sie eine Rechnung von CHF 250.-</strong></p>
+                <p style="margin-top:15px;">Wer bezahlt nun wie viel dieser Rechnung? Notieren Sie Ihre Vermutungen:</p>
+                <textarea id="answer_a" placeholder="Schreiben Sie hier Ihre Vermutung..."></textarea>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag b) 💰 Woher kommt das Geld?</h2>
+                <p>Wenn Sie mal krank sind und zum Arzt gehen müssen, hilft Ihnen die Krankenkasse bei der Bezahlung der Rechnungen. Aber woher hat die Krankenkasse das Geld? Notieren Sie Ihre Überlegungen:</p>
+                <textarea id="answer_b" placeholder="Woher hat die Krankenkasse das Geld?"></textarea>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag c) 📚 Drei wichtige Begriffe</h2>
+                <div class="info-box">
+                    <strong>Wichtig:</strong> Die Krankenkasse bezahlt NICHT alle Ihre Arztrechnungen vollständig! Die drei wichtigen Begriffe sind: <strong>Prämie</strong>, <strong>Franchise</strong> und <strong>Selbstbehalt</strong>.
+                </div>
+                <p>Ordnen Sie die folgenden Definitionen den richtigen Begriffen zu:</p>
+                
+                <div style="margin:20px 0;">
+                    <strong>Definition 1:</strong><br>
+                    <p style="margin:10px 0;">Der Betrag, den Sie jeden Monat an die Krankenkasse zahlen - egal ob Sie krank sind oder nicht.</p>
+                    <select id="def1">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="praemie">Prämie</option>
+                        <option value="franchise">Franchise</option>
+                        <option value="selbstbehalt">Selbstbehalt</option>
+                    </select>
+                    <div id="feedback1" class="feedback"></div>
+                </div>
+
+                <div style="margin:20px 0;">
+                    <strong>Definition 2:</strong><br>
+                    <p style="margin:10px 0;">Der Jahresbetrag, den Sie selbst bezahlen müssen, bevor die Krankenkasse anfängt, Ihre Arztrechnungen zu übernehmen.</p>
+                    <select id="def2">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="praemie">Prämie</option>
+                        <option value="franchise">Franchise</option>
+                        <option value="selbstbehalt">Selbstbehalt</option>
+                    </select>
+                    <div id="feedback2" class="feedback"></div>
+                </div>
+
+                <div style="margin:20px 0;">
+                    <strong>Definition 3:</strong><br>
+                    <p style="margin:10px 0;">10% der Kosten über der Franchise, maximal 700 CHF pro Jahr.</p>
+                    <select id="def3">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="praemie">Prämie</option>
+                        <option value="franchise">Franchise</option>
+                        <option value="selbstbehalt">Selbstbehalt</option>
+                    </select>
+                    <div id="feedback3" class="feedback"></div>
+                </div>
+
+                <button class="btn-success" onclick="checkDefinitions()">✓ Antworten überprüfen</button>
+                <div id="overall-feedback" style="margin-top:20px;"></div>
+            </div>
+
+            <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 2</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            // Load all saved answers for this step
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function saveAndContinue() {
+            // Save all inputs on current page
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            // Mark step as completed
+            if (!progress.completedPoints.includes(1)) {
+                progress.completedPoints.push(1);
+                progress.currentPoint = 2;
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('✅ Schritt 1 abgeschlossen!');
+            window.location.href = 'index.html';
+        }
+
+        function checkDefinitions() {
+            const answers = {
+                def1: 'praemie',      // Monatlicher Betrag = Prämie
+                def2: 'franchise',     // Jahresbetrag vor Kassenzahlung = Franchise
+                def3: 'selbstbehalt'   // 10% der Kosten = Selbstbehalt
+            };
+
+            let allCorrect = true;
+
+            for (let i = 1; i <= 3; i++) {
+                const select = document.getElementById('def' + i);
+                const feedback = document.getElementById('feedback' + i);
+                const selectedValue = select.value;
+
+                if (selectedValue === '') {
+                    feedback.className = 'feedback incorrect';
+                    feedback.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
+                    allCorrect = false;
+                } else if (selectedValue === answers['def' + i]) {
+                    feedback.className = 'feedback correct';
+                    feedback.textContent = '✓ Richtig!';
+                } else {
+                    feedback.className = 'feedback incorrect';
+                    feedback.textContent = '✗ Leider falsch. Versuchen Sie es nochmal!';
+                    allCorrect = false;
+                }
+            }
+
+            const overallFeedback = document.getElementById('overall-feedback');
+            if (allCorrect) {
+                overallFeedback.innerHTML = '<div style="background:#d4edda; padding:20px; border-radius:8px; border:2px solid #28a745; color:#155724; font-weight:bold; text-align:center;">🎉 Ausgezeichnet! Alle Begriffe sind richtig zugeordnet!</div>';
+            } else {
+                overallFeedback.innerHTML = '<div style="background:#fff3cd; padding:15px; border-radius:8px; border:2px solid #ffc107; color:#856404;">💡 Tipp: Überlegen Sie nochmal genau, welcher Begriff zu welcher Definition passt.</div>';
+            }
+        }
+
+        
+        
+        
+
+        // Auto-save on input change
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
