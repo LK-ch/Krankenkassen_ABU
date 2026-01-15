@@ -363,7 +363,7 @@
         <main>
             <div class="info-notice">
                 <strong>💡 So funktioniert dieser Lernpfad:</strong><br>
-                Arbeite dich Schritt für Schritt durch die Themen. Jeder Schritt muss abgeschlossen werden, bevor der nächste freigeschaltet wird. Am Ende kannst du ein vollständiges PDF mit all deinen Antworten herunterladen!
+                Arbeiten Sie sich Schritt für Schritt durch die Themen. Jeder Schritt muss abgeschlossen werden, bevor der nächste freigeschaltet wird. Am Ende können Sie ein vollständiges PDF mit all Ihren Antworten herunterladen!
             </div>
 
             <div class="flowchart-container">
@@ -436,7 +436,7 @@
             </div>
 
             <div class="progress-section">
-                <h2>📊 Dein Fortschritt</h2>
+                <h2>📊 Ihr Fortschritt</h2>
                 
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill" style="width: 0%">0%</div>
@@ -535,27 +535,151 @@
             const margin = 20;
             const pageWidth = doc.internal.pageSize.width - 2 * margin;
             
-            // Add content from each step
+            // Schritt 1: Grundlagen & Begriffe
             const answers = learningProgress.answers;
             
-            if (answers['1_a']) {
+            if (answers['answer_a'] || answers['answer_b'] || answers['def1'] || answers['def2'] || answers['def3']) {
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
                 doc.text('Schritt 1: Grundlagen & Begriffe', margin, yPos);
                 yPos += lineHeight + 5;
                 
-                doc.setFontSize(11);
-                doc.setFont(undefined, 'normal');
-                const lines = doc.splitTextToSize('Auftrag a: ' + answers['1_a'], pageWidth);
-                for (let line of lines) {
-                    if (yPos > 270) {
+                // Auftrag a
+                if (answers['answer_a'] && answers['answer_a'].trim() !== '') {
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag a) Erste Vermutungen', margin, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const linesA = doc.splitTextToSize(answers['answer_a'], pageWidth);
+                    for (let line of linesA) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                // Auftrag b
+                if (answers['answer_b'] && answers['answer_b'].trim() !== '') {
+                    if (yPos > 250) {
                         doc.addPage();
                         yPos = 20;
                     }
-                    doc.text(line, margin, yPos);
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag b) Woher kommt das Geld?', margin, yPos);
                     yPos += lineHeight;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const linesB = doc.splitTextToSize(answers['answer_b'], pageWidth);
+                    for (let line of linesB) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
                 }
+                
+                // Auftrag c - Begriffszuordnungen
+                if (answers['def1'] || answers['def2'] || answers['def3']) {
+                    if (yPos > 220) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag c) Begriffszuordnungen', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    // Definition 1
+                    if (answers['def1']) {
+                        const begriffMap = {
+                            'praemie': 'Prämie',
+                            'franchise': 'Franchise',
+                            'selbstbehalt': 'Selbstbehalt'
+                        };
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Definition 1:', margin, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        doc.text('Der Betrag, den Sie jeden Monat an die Krankenkasse zahlen -', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.text('egal ob Sie krank sind oder nicht.', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Antwort: ' + (begriffMap[answers['def1']] || answers['def1']), margin + 5, yPos);
+                        yPos += lineHeight + 3;
+                        
+                        if (yPos > 250) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                    }
+                    
+                    // Definition 2
+                    if (answers['def2']) {
+                        const begriffMap = {
+                            'praemie': 'Prämie',
+                            'franchise': 'Franchise',
+                            'selbstbehalt': 'Selbstbehalt'
+                        };
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Definition 2:', margin, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        doc.text('Der Jahresbetrag, den Sie selbst bezahlen müssen, bevor die', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.text('Krankenkasse anfängt, Ihre Arztrechnungen zu übernehmen.', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Antwort: ' + (begriffMap[answers['def2']] || answers['def2']), margin + 5, yPos);
+                        yPos += lineHeight + 3;
+                        
+                        if (yPos > 250) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                    }
+                    
+                    // Definition 3
+                    if (answers['def3']) {
+                        const begriffMap = {
+                            'praemie': 'Prämie',
+                            'franchise': 'Franchise',
+                            'selbstbehalt': 'Selbstbehalt'
+                        };
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Definition 3:', margin, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        doc.text('10% der Kosten über der Franchise, maximal 700 CHF pro Jahr.', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Antwort: ' + (begriffMap[answers['def3']] || answers['def3']), margin + 5, yPos);
+                        yPos += lineHeight + 5;
+                    }
+                }
+                
+                yPos += 10;
             }
+            
+            // Weitere Schritte würden hier folgen...
             
             doc.setFontSize(9);
             doc.setTextColor(128);
