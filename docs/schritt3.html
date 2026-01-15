@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 3: Prämien vergleichen</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #d4a373;
+            background: #f8f9fa;
+        }
+        .quiz-option.selected {
+            background: #d4a373;
+            color: white;
+            border-color: #d4a373;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 3: Prämien vergleichen</h1>
+        </header>
+
+        <main>
+            
+            <div class="info-box">
+                <strong>🎯 In diesem Schritt:</strong> Vergleichen Sie Prämien und verstehen Sie den Zusammenhang zwischen Franchise und monatlichen Kosten.
+            </div>
+
+            <div class="task">
+                <h2>Auftrag e) 💻 Prämienvergleich online</h2>
+                <p>Mit Ihrer ermittelten Franchise können Sie nun herausfinden, wie hoch Ihre monatliche Prämie ist.</p>
+                
+                <div style="margin:20px 0; padding:20px; background:#e3f2fd; border-radius:8px;">
+                    <strong>🔍 Nutzen Sie den Prämienrechner unten:</strong>
+                    <p style="margin:10px 0;">Geben Sie Ihre Daten ein und vergleichen Sie die Krankenkassen.</p>
+                    <p style="margin:10px 0;"><em><strong>Wichtig zum Jahrgang:</strong> Falls Sie noch nicht 18 Jahre alt sind, geben Sie zum Beispiel den Jahrgang 2005 ein. Wir schauen die Prämien ab 18 Jahren an, da die Prämien für Kinder und Jugendliche (unter 18) deutlich tiefer sind und nicht mit den Erwachsenentarifen verglichen werden können.</em></p>
+                </div>
+
+                <!-- Swupp eingebettet -->
+                <div style="margin:30px 0;">
+                    <iframe 
+                        src="https://swupp.ch/krankenkassenvergleich" 
+                        width="100%" 
+                        height="800px" 
+                        style="border:2px solid #dee2e6; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.1);"
+                        title="Swupp Krankenkassenvergleich">
+                    </iframe>
+                </div>
+
+                <div style="margin:20px 0; padding:20px; background:#fff3e0; border-radius:8px; border-left:4px solid #ff9800;">
+                    <strong>ℹ️ Weitere Vergleichsportale (optional):</strong>
+                    <p style="margin:10px 0;">Sie können die Prämien auch auf diesen Portalen vergleichen:</p>
+                    <ul style="margin:10px 0 10px 20px;">
+                        <li><a href="https://www.priminfo.ch" target="_blank">www.priminfo.ch</a> (Offizielles Portal des Bundes)</li>
+                        <li><a href="https://www.comparis.ch/krankenkassen/praemienvergleich" target="_blank">www.comparis.ch</a></li>
+                    </ul>
+                </div>
+
+                <div style="margin:20px 0;">
+                    <label><strong>Ihre gewählte Franchise:</strong></label>
+                    <input type="number" id="chosen_franchise" placeholder="z.B. 2500" style="margin-top:10px;">
+                </div>
+
+                <div style="margin:20px 0;">
+                    <label><strong>Günstigste Krankenkasse (Name & Prämie pro Monat):</strong></label>
+                    <input type="text" id="cheapest_kk" placeholder="z.B. Assura, 295 CHF/Monat" style="margin-top:10px;">
+                </div>
+
+                <div style="margin:20px 0;">
+                    <label><strong>Teuerste Krankenkasse (Name & Prämie pro Monat):</strong></label>
+                    <input type="text" id="expensive_kk" placeholder="z.B. Helsana, 450 CHF/Monat" style="margin-top:10px;">
+                </div>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag f) 📝 Merksatz formulieren</h2>
+                <p>Vergleichen Sie die verschiedenen Monatsprämien. Welchen Zusammenhang erkennen Sie zwischen Monatsprämie und Franchise?</p>
+                <textarea id="merksatz" placeholder="Formulieren Sie einen Merksatz zum Zusammenhang zwischen Prämie und Franchise..."></textarea>
+            </div>
+
+            <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 4</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            // Load all saved answers for this step
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function saveAndContinue() {
+            // Save all inputs on current page
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            // Mark step as completed
+            if (!progress.completedPoints.includes(3)) {
+                progress.completedPoints.push(3);
+                progress.currentPoint = 4;
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('✅ Schritt 3 abgeschlossen!');
+            window.location.href = 'index.html';
+        }
+
+        
+        
+        
+
+        // Auto-save on input change
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
