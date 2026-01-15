@@ -1,1 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 4: Kostenberechnungen</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #d4a373;
+            background: #f8f9fa;
+        }
+        .quiz-option.selected {
+            background: #d4a373;
+            color: white;
+            border-color: #d4a373;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
 
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 4: Kostenberechnungen</h1>
+        </header>
+
+        <main>
+            
+            <div class="task">
+                <h2>Auftrag g) 🧮 Alexas Krankenkassenkosten 2023</h2>
+                <p>Alexa ist oft beim Arzt. Deshalb hat sie sich für eine <strong>Franchise von CHF 300.-</strong> entschieden.</p>
+                
+                <div style="margin:20px 0; padding:20px; background:#fff3e0; border-radius:8px;">
+                    <strong>📋 Alexas Arztrechnungen 2023:</strong>
+                    <table style="margin-top:15px;">
+                        <tr>
+                            <th>Monat</th>
+                            <th>Grund</th>
+                            <th>Kosten</th>
+                        </tr>
+                        <tr>
+                            <td>Januar</td>
+                            <td>Hausarzt (Grippe)</td>
+                            <td>120 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>März</td>
+                            <td>Hausarzt (Kontrolle)</td>
+                            <td>85 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>Mai</td>
+                            <td>Spital (Notfall)</td>
+                            <td>580 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>November</td>
+                            <td>Hausarzt (Untersuchung)</td>
+                            <td>240 CHF</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Berechnungsschritte:</strong><br>
+                    1. Alle Arztrechnungen zusammenzählen<br>
+                    2. Franchise (300 CHF) abziehen<br>
+                    3. Selbstbehalt berechnen (10% vom Rest, max. 700 CHF)<br>
+                    4. Rest zahlt die Krankenkasse
+                </div>
+
+                <p><strong>Berechnen Sie:</strong></p>
+                <textarea id="alexa_calculation" rows="10" placeholder="Notieren Sie hier Ihren Rechnungsweg und das Ergebnis..."></textarea>
+
+                <button class="btn-success" onclick="showSolution()">✓ Lösung anzeigen</button>
+                <div id="solution" style="display:none; margin-top:20px; padding:20px; background:#e8f5e9; border-radius:8px;">
+                    <h3>📊 Lösung:</h3>
+                    <p><strong>Schritt 1:</strong> Gesamtkosten = 120 + 85 + 580 + 240 = 1025 CHF</p>
+                    <p><strong>Schritt 2:</strong> Nach Franchise = 1025 - 300 = 725 CHF</p>
+                    <p><strong>Schritt 3:</strong> Selbstbehalt = 725 × 10% = 72.50 CHF</p>
+                    <p><strong>Ergebnis:</strong></p>
+                    <p>• Alexa zahlt: 300 (Franchise) + 72.50 (Selbstbehalt) = <strong>372.50 CHF</strong></p>
+                    <p>• Krankenkasse zahlt: <strong>652.50 CHF</strong></p>
+                </div>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag h) ❓ Verständnisfrage</h2>
+                <p>Muss Alexa die Rechnung vom Hausarzt (240 CHF im November) selber zahlen?</p>
+                <p>Ergänzen Sie die Antwort mit den richtigen Begriffen:</p>
+                <textarea id="understanding" rows="3" placeholder="Formulieren Sie Ihre Antwort..."></textarea>
+            </div>
+
+            <div class="task">
+                <h2>Auftrag i) 🧮 Ahmeds Krankenkassenkosten 2024</h2>
+                <p>Ahmed ist Mechaniker und hat sich für eine <strong>Franchise von CHF 2500.-</strong> entschieden, da er normalerweise sehr gesund ist.</p>
+                
+                <div style="margin:20px 0; padding:20px; background:#fff3e0; border-radius:8px;">
+                    <strong>📋 Ahmeds Arztrechnungen 2024:</strong>
+                    <table style="margin-top:15px;">
+                        <tr>
+                            <th>Monat</th>
+                            <th>Grund</th>
+                            <th>Kosten</th>
+                        </tr>
+                        <tr>
+                            <td>Februar</td>
+                            <td>Hausarzt (Erkältung)</td>
+                            <td>95 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>April</td>
+                            <td>Notfall (Schnittwunde am Finger)</td>
+                            <td>380 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>Juni</td>
+                            <td>Hausarzt (Rückenschmerzen)</td>
+                            <td>120 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>Oktober</td>
+                            <td>Zahnarzt (Kontrolle)</td>
+                            <td>180 CHF</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <strong>🤔 Ihre Aufgabe:</strong> Berechnen Sie, wie viel Ahmed selbst bezahlt und wie viel die Krankenkasse übernimmt. Nutzen Sie die gleichen Berechnungsschritte wie bei Alexa.
+                </div>
+
+                <p><strong>Ihre Berechnung für Ahmed:</strong></p>
+                <textarea id="ahmed_calculation" rows="10" placeholder="Notieren Sie hier Ihren Rechnungsweg und das Ergebnis..."></textarea>
+
+                <div style="margin-top:15px; padding:15px; background:#e3f2fd; border-radius:8px; border-left:4px solid #2196f3;">
+                    <strong>📢 Hinweis:</strong> Diese Aufgabe wird gemeinsam in der Klasse besprochen. Es gibt hier keine automatische Lösung.
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 5</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            // Load all saved answers for this step
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function saveAndContinue() {
+            // Save all inputs on current page
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            // Mark step as completed
+            if (!progress.completedPoints.includes(4)) {
+                progress.completedPoints.push(4);
+                progress.currentPoint = 5;
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('✅ Schritt 4 abgeschlossen!');
+            window.location.href = 'index.html';
+        }
+
+        
+        function showSolution() { document.getElementById('solution').style.display = 'block'; }
+        
+
+        // Auto-save on input change
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
