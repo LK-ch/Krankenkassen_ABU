@@ -821,6 +821,118 @@
                 yPos += 10;
             }
             
+            // Schritt 4: Kostenberechnungen
+            if (answers['alexa_calculation'] || answers['understanding'] || answers['ahmed_calculation']) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 4: Kostenberechnungen', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                // Alexas Fall
+                if (answers['alexa_calculation'] && answers['alexa_calculation'].trim() !== '') {
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag g) Alexas Krankenkassenkosten 2023:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    doc.text('Franchise: 300 CHF', margin + 5, yPos);
+                    yPos += lineHeight;
+                    doc.text('Arztrechnungen: 120 + 85 + 580 + 240 = 1025 CHF', margin + 5, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Meine Berechnung:', margin + 5, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFont(undefined, 'normal');
+                    const alexaLines = doc.splitTextToSize(answers['alexa_calculation'], pageWidth - 10);
+                    for (let line of alexaLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 10, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                // Verständnisfrage
+                if (answers['understanding'] && answers['understanding'].trim() !== '') {
+                    if (yPos > 250) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag h) Verständnisfrage:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'italic');
+                    doc.text('Muss Alexa die Rechnung vom Hausarzt (240 CHF im November) selber zahlen?', margin + 5, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFont(undefined, 'normal');
+                    const understandingLines = doc.splitTextToSize(answers['understanding'], pageWidth - 10);
+                    for (let line of understandingLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 10, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                // Ahmeds Fall
+                if (answers['ahmed_calculation'] && answers['ahmed_calculation'].trim() !== '') {
+                    if (yPos > 230) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Auftrag i) Ahmeds Krankenkassenkosten 2024:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    doc.text('Franchise: 2500 CHF', margin + 5, yPos);
+                    yPos += lineHeight;
+                    doc.text('Arztrechnungen: 95 + 380 + 120 + 180 = 775 CHF', margin + 5, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Meine Berechnung:', margin + 5, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFont(undefined, 'normal');
+                    const ahmedLines = doc.splitTextToSize(answers['ahmed_calculation'], pageWidth - 10);
+                    for (let line of ahmedLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 10, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                yPos += 10;
+            }
+            
             doc.setFontSize(9);
             doc.setTextColor(128);
             doc.text('Ende des Lernjournals', 105, 285, { align: 'center' });
