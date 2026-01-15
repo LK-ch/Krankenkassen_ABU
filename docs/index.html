@@ -821,6 +821,193 @@
                 yPos += 10;
             }
             
+            // Schritt 3: Prämienvergleich
+            if (answers['wohnort'] || answers['cheapest_kk'] || answers['vergleich_ort1'] || answers['merksatz']) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 3: Prämienvergleich', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                // Persönliche Daten
+                if (answers['wohnort'] || answers['alter'] || answers['chosen_franchise']) {
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Meine Daten:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    if (answers['wohnort']) {
+                        doc.text('Wohnort: ' + answers['wohnort'], margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    if (answers['alter']) {
+                        doc.text('Alter/Jahrgang: ' + answers['alter'], margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    if (answers['chosen_franchise']) {
+                        doc.text('Gewählte Franchise: ' + answers['chosen_franchise'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                // Prämien
+                if (answers['cheapest_kk'] || answers['expensive_kk']) {
+                    if (yPos > 250) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Prämienvergleich:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    if (answers['cheapest_kk']) {
+                        doc.text('Günstigste Krankenkasse: ' + answers['cheapest_kk'], margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    if (answers['expensive_kk']) {
+                        doc.text('Teuerste Krankenkasse: ' + answers['expensive_kk'], margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 5;
+                }
+                
+                // Wohnort-Vergleich
+                if (answers['vergleich_ort1'] || answers['vergleich_ort2']) {
+                    if (yPos > 200) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Vergleich: Zwei Wohnorte', margin, yPos);
+                    yPos += lineHeight + 5;
+                    
+                    doc.setFontSize(11);
+                    
+                    // Wohnort 1
+                    if (answers['vergleich_ort1']) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Wohnort 1: ' + answers['vergleich_ort1'], margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        
+                        if (answers['vergleich_franchise1']) {
+                            doc.text('- Franchise: ' + answers['vergleich_franchise1'] + ' CHF', margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_guenstig1']) {
+                            doc.text('- Günstigste Prämie: ' + answers['vergleich_guenstig1'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_teuer1']) {
+                            doc.text('- Teuerste Prämie: ' + answers['vergleich_teuer1'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_unterschied1']) {
+                            doc.text('- Preisunterschied: ' + answers['vergleich_unterschied1'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        yPos += 3;
+                    }
+                    
+                    // Wohnort 2
+                    if (answers['vergleich_ort2']) {
+                        if (yPos > 240) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Wohnort 2: ' + answers['vergleich_ort2'], margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        
+                        if (answers['vergleich_franchise2']) {
+                            doc.text('- Franchise: ' + answers['vergleich_franchise2'] + ' CHF', margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_guenstig2']) {
+                            doc.text('- Günstigste Prämie: ' + answers['vergleich_guenstig2'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_teuer2']) {
+                            doc.text('- Teuerste Prämie: ' + answers['vergleich_teuer2'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        if (answers['vergleich_unterschied2']) {
+                            doc.text('- Preisunterschied: ' + answers['vergleich_unterschied2'], margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        yPos += 5;
+                    }
+                    
+                    // Beobachtung
+                    if (answers['vergleich_beobachtung'] && answers['vergleich_beobachtung'].trim() !== '') {
+                        if (yPos > 240) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Beobachtung:', margin + 5, yPos);
+                        yPos += lineHeight;
+                        
+                        doc.setFont(undefined, 'normal');
+                        const beobachtungLines = doc.splitTextToSize(answers['vergleich_beobachtung'], pageWidth - 10);
+                        for (let line of beobachtungLines) {
+                            if (yPos > 270) {
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            doc.text(line, margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                        yPos += 5;
+                    }
+                }
+                
+                // Merksatz
+                if (answers['merksatz'] && answers['merksatz'].trim() !== '') {
+                    if (yPos > 240) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Merksatz (Zusammenhang Prämie & Franchise):', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const merksatzLines = doc.splitTextToSize(answers['merksatz'], pageWidth - 10);
+                    for (let line of merksatzLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                }
+                
+                yPos += 10;
+            }
+            
             // Schritt 4: Kostenberechnungen
             if (answers['alexa_calculation'] || answers['understanding'] || answers['ahmed_calculation']) {
                 if (yPos > 220) {
