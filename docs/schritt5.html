@@ -147,6 +147,39 @@
             color: white;
             border-color: #d4a373;
         }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: none;
+        }
+        .feedback.correct {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        .feedback.incorrect {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        .answer-correct {
+            background: #d4edda !important;
+            border: 2px solid #28a745 !important;
+            padding: 8px !important;
+            border-radius: 5px !important;
+            margin: 3px 0 !important;
+        }
+        .answer-incorrect {
+            background: #f8d7da !important;
+            border: 2px solid #dc3545 !important;
+            padding: 8px !important;
+            border-radius: 5px !important;
+            margin: 3px 0 !important;
+        }
         @media (max-width: 768px) {
             main { padding: 20px; }
             header h1 { font-size: 1.5em; }
@@ -462,10 +495,26 @@
             let correctCount = 0;
             let totalCount = 0;
 
+            // Zuerst alle vorherigen Markierungen entfernen
+            document.querySelectorAll('.answer-correct, .answer-incorrect').forEach(el => {
+                el.classList.remove('answer-correct', 'answer-incorrect');
+            });
+
             // Aufgabe 1
             totalCount++;
             const aufg1 = document.querySelector('input[name="aufg1_frage"]:checked');
             const feedback1 = document.getElementById('feedback_aufg1');
+            
+            // Markiere alle Optionen
+            document.querySelectorAll('input[name="aufg1_frage"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'b') {
+                    label.classList.add('answer-correct');
+                } else if (aufg1 && aufg1.value === input.value && input.value !== 'b') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (!aufg1) {
                 feedback1.className = 'feedback incorrect';
                 feedback1.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
@@ -483,6 +532,19 @@
             const aufg2checks = document.querySelectorAll('input[name="aufg2_deckt"]:checked');
             const aufg2values = Array.from(aufg2checks).map(cb => cb.value);
             const feedback2a = document.getElementById('feedback_aufg2a');
+            
+            // Markiere Checkboxen
+            document.querySelectorAll('input[name="aufg2_deckt"]').forEach(input => {
+                const label = input.closest('label');
+                if ((input.value === 'lotfaelle' || input.value === 'planbar') && input.checked) {
+                    label.classList.add('answer-correct');
+                } else if (input.value === 'zahn' && input.checked) {
+                    label.classList.add('answer-incorrect');
+                } else if ((input.value === 'lotfaelle' || input.value === 'planbar') && !input.checked) {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (aufg2values.includes('lotfaelle') && aufg2values.includes('planbar') && !aufg2values.includes('zahn')) {
                 feedback2a.className = 'feedback correct';
                 feedback2a.textContent = '✓ Richtig! Die Grundversicherung deckt Lotfälle und planbare Behandlungen ab, aber NICHT Zahnbehandlungen.';
@@ -496,6 +558,16 @@
             totalCount++;
             const aufg3 = document.querySelector('input[name="aufg3_vogel"]:checked');
             const feedback3a = document.getElementById('feedback_aufg3a');
+            
+            document.querySelectorAll('input[name="aufg3_vogel"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'b') {
+                    label.classList.add('answer-correct');
+                } else if (aufg3 && aufg3.value === input.value && input.value !== 'b') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (!aufg3) {
                 feedback3a.className = 'feedback incorrect';
                 feedback3a.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
@@ -512,6 +584,16 @@
             totalCount++;
             const aufg3b1 = document.querySelector('input[name="aufg3b_grund"]:checked');
             const feedback3b1 = document.getElementById('feedback_aufg3b1');
+            
+            document.querySelectorAll('input[name="aufg3b_grund"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'richtig') {
+                    label.classList.add('answer-correct');
+                } else if (aufg3b1 && aufg3b1.value === input.value && input.value !== 'richtig') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (!aufg3b1) {
                 feedback3b1.className = 'feedback incorrect';
                 feedback3b1.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
@@ -528,6 +610,16 @@
             totalCount++;
             const aufg3b2 = document.querySelector('input[name="aufg3b_zusatz"]:checked');
             const feedback3b2 = document.getElementById('feedback_aufg3b2');
+            
+            document.querySelectorAll('input[name="aufg3b_zusatz"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'richtig') {
+                    label.classList.add('answer-correct');
+                } else if (aufg3b2 && aufg3b2.value === input.value && input.value !== 'richtig') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (!aufg3b2) {
                 feedback3b2.className = 'feedback incorrect';
                 feedback3b2.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
@@ -545,6 +637,18 @@
             const aufg4checks = document.querySelectorAll('input[name="aufg4_vorteile"]:checked');
             const aufg4values = Array.from(aufg4checks).map(cb => cb.value);
             const feedback4 = document.getElementById('feedback_aufg4');
+            
+            document.querySelectorAll('input[name="aufg4_vorteile"]').forEach(input => {
+                const label = input.closest('label');
+                if ((input.value === 'spezialist' || input.value === 'spital' || input.value === 'kontrolle') && input.checked) {
+                    label.classList.add('answer-correct');
+                } else if (input.value === 'guenstiger' && input.checked) {
+                    label.classList.add('answer-incorrect');
+                } else if ((input.value === 'spezialist' || input.value === 'spital' || input.value === 'kontrolle') && !input.checked) {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             const correctVorteile = aufg4values.includes('spezialist') && aufg4values.includes('spital') && aufg4values.includes('kontrolle') && !aufg4values.includes('guenstiger');
             if (correctVorteile) {
                 feedback4.className = 'feedback correct';
@@ -559,6 +663,16 @@
             totalCount++;
             const aufg5 = document.querySelector('input[name="aufg5_qualitaet"]:checked');
             const feedback5 = document.getElementById('feedback_aufg5');
+            
+            document.querySelectorAll('input[name="aufg5_qualitaet"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'b') {
+                    label.classList.add('answer-correct');
+                } else if (aufg5 && aufg5.value === input.value && input.value !== 'b') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
             if (!aufg5) {
                 feedback5.className = 'feedback incorrect';
                 feedback5.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
@@ -587,6 +701,17 @@
                 totalCount++;
                 const selected = document.querySelector(`input[name="${z.name}"]:checked`);
                 const feedbackEl = document.getElementById(z.feedback);
+                
+                // Markiere die Labels
+                document.querySelectorAll(`input[name="${z.name}"]`).forEach(input => {
+                    const label = input.closest('label');
+                    if (input.value === z.correct) {
+                        label.classList.add('answer-correct');
+                    } else if (selected && selected.value === input.value && input.value !== z.correct) {
+                        label.classList.add('answer-incorrect');
+                    }
+                });
+                
                 if (!selected) {
                     feedbackEl.className = 'feedback incorrect';
                     feedbackEl.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
