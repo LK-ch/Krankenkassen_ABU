@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 2: Franchise verstehen</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #d4a373;
+            background: #f8f9fa;
+        }
+        .quiz-option.selected {
+            background: #d4a373;
+            color: white;
+            border-color: #d4a373;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 2: Franchise verstehen</h1>
+        </header>
+
+        <main>
+            
+            <div class="info-box">
+                <strong>🎯 In diesem Schritt lernen Sie:</strong> Wie Sie die richtige Franchise für sich wählen.
+            </div>
+
+            <div class="task">
+                <h2>Auftrag d) 🤔 Welche Franchise passt zu Ihnen?</h2>
+                <p>Um die richtige Franchise zu wählen, müssen Sie drei wichtige Fragen beantworten:</p>
+                
+                <div style="margin:20px 0;">
+                    <strong>1. Wie ist Ihr allgemeiner Gesundheitszustand?</strong><br>
+                    <select id="health_status" style="margin-top:10px;">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="gesund">Ich bin meistens gesund, max 2x beim Arzt im Jahr</option>
+                        <option value="mittel">Ich gehe 3-5x pro Jahr zum Arzt</option>
+                        <option value="oft">Ich bin oft beim Arzt / oft krank</option>
+                    </select>
+                </div>
+
+                <div style="margin:20px 0;">
+                    <strong>2. Wie hoch sind Ihre Ersparnisse für die Krankenkasse?</strong><br>
+                    <select id="savings" style="margin-top:10px;">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="0">0 CHF verfügbar</option>
+                        <option value="1000">Etwa 1000 CHF verfügbar</option>
+                        <option value="3000">3000 CHF oder mehr verfügbar</option>
+                    </select>
+                </div>
+
+                <div style="margin:20px 0;">
+                    <strong>3. Wie hoch waren Ihre Gesundheitskosten in den letzten Jahren?</strong><br>
+                    <input type="number" id="past_costs" placeholder="Betrag in CHF pro Jahr" style="margin-top:10px;">
+                </div>
+
+                <button class="btn-success" onclick="calculateFranchise()">📊 Meine passende Franchise berechnen</button>
+                
+                <div id="franchise_result" style="display:none; margin-top:20px; padding:20px; background:#e8f5e9; border-radius:8px; border-left:4px solid #4CAF50;">
+                    <h3 style="color:#2e7d32; margin-bottom:10px;">🎯 Ihre empfohlene Franchise:</h3>
+                    <div id="franchise_value" style="font-size:2em; font-weight:bold; color:#1b5e20; margin:15px 0;"></div>
+                    <div id="franchise_explanation" style="color:#2e7d32;"></div>
+                </div>
+            </div>
+
+            <div class="task">
+                <h2>📝 Fallbeispiele: Welche Franchise passt?</h2>
+                <p>Lesen Sie die folgenden Fälle und entscheiden Sie, welche Franchise am besten passt:</p>
+
+                <div style="margin:25px 0; padding:20px; background:white; border-radius:8px; border:2px solid #dee2e6;">
+                    <strong>Fall 1: Anna, 24 Jahre</strong>
+                    <p style="margin:10px 0;">Anna ist Fitnesstrainerin und sehr sportlich. Sie war letztes Jahr nur 1x beim Arzt wegen einer leichten Erkältung. Sie hat 5000 CHF auf dem Sparkonto und möchte monatliche Prämien sparen.</p>
+                    <label style="display:block; margin-top:10px;"><strong>Welche Franchise empfehlen Sie?</strong></label>
+                    <select id="fall1_franchise" style="margin-top:10px;">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="300">300 CHF - Niedrige Franchise</option>
+                        <option value="1000">1000 CHF - Mittlere Franchise</option>
+                        <option value="2500">2500 CHF - Hohe Franchise</option>
+                    </select>
+                    <div id="fall1_feedback" class="feedback"></div>
+                </div>
+
+                <div style="margin:25px 0; padding:20px; background:white; border-radius:8px; border:2px solid #dee2e6;">
+                    <strong>Fall 2: Herr Meier, 45 Jahre</strong>
+                    <p style="margin:10px 0;">Herr Meier hat Diabetes und muss regelmäßig zur Kontrolle (etwa 8x pro Jahr). Er hat nur 500 CHF Notgroschen und arbeitet als Verkäufer mit mittlerem Einkommen.</p>
+                    <label style="display:block; margin-top:10px;"><strong>Welche Franchise empfehlen Sie?</strong></label>
+                    <select id="fall2_franchise" style="margin-top:10px;">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="300">300 CHF - Niedrige Franchise</option>
+                        <option value="1000">1000 CHF - Mittlere Franchise</option>
+                        <option value="2500">2500 CHF - Hohe Franchise</option>
+                    </select>
+                    <div id="fall2_feedback" class="feedback"></div>
+                </div>
+
+                <div style="margin:25px 0; padding:20px; background:white; border-radius:8px; border:2px solid #dee2e6;">
+                    <strong>Fall 3: Sarah, 28 Jahre</strong>
+                    <p style="margin:10px 0;">Sarah ist Grafikdesignerin und geht etwa 3-4x pro Jahr zum Arzt (Routine-Checks, gelegentlich Rückenschmerzen). Sie hat 2500 CHF gespart und möchte einen guten Mittelweg finden.</p>
+                    <label style="display:block; margin-top:10px;"><strong>Welche Franchise empfehlen Sie?</strong></label>
+                    <select id="fall3_franchise" style="margin-top:10px;">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="300">300 CHF - Niedrige Franchise</option>
+                        <option value="1000">1000 CHF - Mittlere Franchise</option>
+                        <option value="2500">2500 CHF - Hohe Franchise</option>
+                    </select>
+                    <div id="fall3_feedback" class="feedback"></div>
+                </div>
+
+                <button class="btn-success" onclick="checkCases()">✓ Fallbeispiele überprüfen</button>
+                <div id="cases_overall_feedback" style="margin-top:20px;"></div>
+            </div>
+
+            <div class="task">
+                <h2>💭 Reflexion: Zusammenhänge verstehen</h2>
+                <p>Erklären Sie in eigenen Worten: Wie hängen Gesundheitszustand, finanzielle Ressourcen und Franchise-Wahl zusammen?</p>
+                <textarea id="franchise_reasoning" rows="5" placeholder="Begründen Sie die Zusammenhänge zwischen Gesundheit, Finanzen und Franchise-Wahl..."></textarea>
+            </div>
+
+            <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 3</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            // Load all saved answers for this step
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function saveAndContinue() {
+            // Save all inputs on current page
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            // Mark step as completed
+            if (!progress.completedPoints.includes(2)) {
+                progress.completedPoints.push(2);
+                progress.currentPoint = 3;
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('✅ Schritt 2 abgeschlossen!');
+            window.location.href = 'index.html';
+        }
+
+        function calculateFranchise() { const health = document.getElementById('health_status').value; const savings = document.getElementById('savings').value; const pastCosts = parseInt(document.getElementById('past_costs').value) || 0; let recommendation = ''; let explanation = ''; if (health === 'oft' || savings === '0') { recommendation = '300 CHF'; explanation = 'Sie gehen oft zum Arzt oder haben wenig Rücklagen. Eine niedrige Franchise ist für Sie am besten.'; } else if (health === 'gesund' && savings === '3000' && pastCosts < 500) { recommendation = '2000 - 2500 CHF'; explanation = 'Sie sind sehr gesund und haben gute Rücklagen. Eine hohe Franchise spart Prämien.'; } else { recommendation = '1000 - 1500 CHF'; explanation = 'Eine mittlere Franchise bietet einen guten Kompromiss für Ihre Situation.'; } document.getElementById('franchise_result').style.display = 'block'; document.getElementById('franchise_value').textContent = recommendation; document.getElementById('franchise_explanation').textContent = explanation; }
+        
+        function checkCases() {
+            const correctAnswers = {
+                fall1_franchise: '2500',  // Anna: gesund, gute Rücklagen
+                fall2_franchise: '300',   // Herr Meier: oft Arzt, wenig Geld
+                fall3_franchise: '1000'   // Sarah: mittelmäßig
+            };
+
+            let allCorrect = true;
+
+            // Fall 1 - Anna
+            const fall1 = document.getElementById('fall1_franchise').value;
+            const feedback1 = document.getElementById('fall1_feedback');
+            if (fall1 === '') {
+                feedback1.className = 'feedback incorrect';
+                feedback1.textContent = '❌ Bitte wählen Sie eine Franchise aus.';
+                allCorrect = false;
+            } else if (fall1 === correctAnswers.fall1_franchise) {
+                feedback1.className = 'feedback correct';
+                feedback1.textContent = '✓ Richtig! Anna ist sehr gesund und hat gute Rücklagen → hohe Franchise sinnvoll.';
+            } else {
+                feedback1.className = 'feedback incorrect';
+                feedback1.textContent = '✗ Nicht optimal. Anna ist sehr gesund und hat genug Geld gespart. Welche Franchise würde Prämien sparen?';
+                allCorrect = false;
+            }
+
+            // Fall 2 - Herr Meier
+            const fall2 = document.getElementById('fall2_franchise').value;
+            const feedback2 = document.getElementById('fall2_feedback');
+            if (fall2 === '') {
+                feedback2.className = 'feedback incorrect';
+                feedback2.textContent = '❌ Bitte wählen Sie eine Franchise aus.';
+                allCorrect = false;
+            } else if (fall2 === correctAnswers.fall2_franchise) {
+                feedback2.className = 'feedback correct';
+                feedback2.textContent = '✓ Richtig! Herr Meier geht oft zum Arzt und hat wenig Rücklagen → niedrige Franchise sinnvoll.';
+            } else {
+                feedback2.className = 'feedback incorrect';
+                feedback2.textContent = '✗ Nicht optimal. Herr Meier hat hohe Arztkosten und wenig Geld gespart. Eine niedrige Franchise ist hier besser.';
+                allCorrect = false;
+            }
+
+            // Fall 3 - Sarah
+            const fall3 = document.getElementById('fall3_franchise').value;
+            const feedback3 = document.getElementById('fall3_feedback');
+            if (fall3 === '') {
+                feedback3.className = 'feedback incorrect';
+                feedback3.textContent = '❌ Bitte wählen Sie eine Franchise aus.';
+                allCorrect = false;
+            } else if (fall3 === correctAnswers.fall3_franchise) {
+                feedback3.className = 'feedback correct';
+                feedback3.textContent = '✓ Richtig! Sarah ist mittelgesund mit mittleren Rücklagen → mittlere Franchise ist ein guter Kompromiss.';
+            } else {
+                feedback3.className = 'feedback incorrect';
+                feedback3.textContent = '✗ Nicht optimal. Sarah braucht einen Mittelweg zwischen Kosten und Sicherheit.';
+                allCorrect = false;
+            }
+
+            const overallFeedback = document.getElementById('cases_overall_feedback');
+            if (allCorrect) {
+                overallFeedback.innerHTML = '<div style="background:#d4edda; padding:20px; border-radius:8px; border:2px solid #28a745; color:#155724; font-weight:bold; text-align:center;">🎉 Hervorragend! Sie haben alle Fälle richtig eingeschätzt!</div>';
+            } else {
+                overallFeedback.innerHTML = '<div style="background:#fff3cd; padding:15px; border-radius:8px; border:2px solid #ffc107; color:#856404;">💡 Überlegen Sie nochmal: Gesundheitszustand + finanzielle Ressourcen = richtige Franchise-Wahl</div>';
+            }
+        }
+        
+        
+
+        // Auto-save on input change
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
