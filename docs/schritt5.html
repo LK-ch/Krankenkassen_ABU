@@ -167,18 +167,18 @@
             border-left: 4px solid #dc3545;
         }
         .answer-correct {
-            background: #d4edda !important;
-            border: 2px solid #28a745 !important;
-            padding: 8px !important;
-            border-radius: 5px !important;
-            margin: 3px 0 !important;
+            background: #e8f5e9 !important;
+            border-left: 3px solid #4CAF50 !important;
+            padding: 5px 8px !important;
+            border-radius: 4px !important;
+            margin: 2px 0 !important;
         }
         .answer-incorrect {
-            background: #f8d7da !important;
-            border: 2px solid #dc3545 !important;
-            padding: 8px !important;
-            border-radius: 5px !important;
-            margin: 3px 0 !important;
+            background: #ffebee !important;
+            border-left: 3px solid #f44336 !important;
+            padding: 5px 8px !important;
+            border-radius: 4px !important;
+            margin: 2px 0 !important;
         }
         @media (max-width: 768px) {
             main { padding: 20px; }
@@ -274,9 +274,10 @@
                     Wie viel hat es gekostet?
                     <input type="text" id="aufgabe2b_kosten" placeholder="Betrag in CHF" style="width:45%; margin-left:10px;">
                 </div>
+                <div id="feedback_aufg2b" class="feedback"></div>
 
                 <h3 style="margin-top:25px;">Aufgabe 3: Gesundheitsprüfung - Herr Vogel (01:33-02:00)</h3>
-                <p><strong>a) Was ist Herr Vogels Problem?</strong></p>
+                <p><strong>Was ist Herr Vogels Problem?</strong></p>
                 <div style="margin:10px 0 10px 20px;">
                     <label style="display:block; margin:5px 0;">
                         <input type="radio" name="aufg3_vogel" value="a" style="width:auto; margin-right:10px;">
@@ -291,32 +292,7 @@
                         Seine Grundversicherung wurde gekündigt
                     </label>
                 </div>
-                <div id="feedback_aufg3a" class="feedback"></div>
-                
-                <p style="margin-top:15px;"><strong>b) Kreuzen Sie an: Richtig oder Falsch?</strong></p>
-                <div style="margin:10px 0; padding:15px; background:#f8f9fa; border-radius:8px;">
-                    <div style="margin:10px 0;">
-                        Die Grundversicherung muss jeden aufnehmen.<br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="aufg3b_grund" value="richtig" style="width:auto; margin:0 5px 0 10px;"> Richtig
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="aufg3b_grund" value="falsch" style="width:auto; margin:0 5px 0 10px;"> Falsch
-                        </label>
-                    </div>
-                    <div id="feedback_aufg3b1" class="feedback"></div>
-                    
-                    <div style="margin:10px 0;">
-                        Die Zusatzversicherung kann Personen ablehnen.<br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="aufg3b_zusatz" value="richtig" style="width:auto; margin:0 5px 0 10px;"> Richtig
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="aufg3b_zusatz" value="falsch" style="width:auto; margin:0 5px 0 10px;"> Falsch
-                        </label>
-                    </div>
-                    <div id="feedback_aufg3b2" class="feedback"></div>
-                </div>
+                <div id="feedback_aufg3" class="feedback"></div>
 
                 <h3 style="margin-top:25px;">Aufgabe 4: Wahlfreiheit (02:00-02:43)</h3>
                 <p><strong>Welche Vorteile der Zusatzversicherung werden genannt? (Mehrfachauswahl)</strong></p>
@@ -340,25 +316,7 @@
                 </div>
                 <div id="feedback_aufg4" class="feedback"></div>
 
-                <h3 style="margin-top:25px;">Aufgabe 5: Qualität der Grundversicherung (02:43-03:13)</h3>
-                <p><strong>Was wird über die allgemeine Abteilung gesagt?</strong></p>
-                <div style="margin:10px 0 10px 20px;">
-                    <label style="display:block; margin:5px 0;">
-                        <input type="radio" name="aufg5_qualitaet" value="a" style="width:auto; margin-right:10px;">
-                        Sie ist zweite Klasse und nicht gut genug
-                    </label>
-                    <label style="display:block; margin:5px 0;">
-                        <input type="radio" name="aufg5_qualitaet" value="b" style="width:auto; margin-right:10px;">
-                        Sie hat einen extrem hohen Standard in der Schweiz
-                    </label>
-                    <label style="display:block; margin:5px 0;">
-                        <input type="radio" name="aufg5_qualitaet" value="c" style="width:auto; margin-right:10px;">
-                        Sie ist nur für arme Leute gedacht
-                    </label>
-                </div>
-                <div id="feedback_aufg5" class="feedback"></div>
-
-                <h3 style="margin-top:25px;">Aufgabe 6: Grundversicherung vs. Zusatzversicherung - Zuordnung</h3>
+                <h3 style="margin-top:25px;">Aufgabe 5: Grundversicherung vs. Zusatzversicherung - Zuordnung</h3>
                 <p><strong>Ordnen Sie die Aussagen zu: Gehört es zur Grundversicherung (G) oder Zusatzversicherung (Z)?</strong></p>
                 
                 <div style="margin:20px 0; padding:20px; background:#f8f9fa; border-radius:8px;">
@@ -458,9 +416,9 @@
                 </div>
                 <div id="overall_feedback" style="margin-top:20px;"></div>
 
-                <h3 style="margin-top:35px;">Aufgabe 7: Ihre persönliche Meinung</h3>
+                <h3 style="margin-top:35px;">Aufgabe 6: Ihre persönliche Meinung</h3>
                 <p>Nach dem Hören dieser Diskussion: Welche Seite überzeugt Sie mehr? Würden Sie persönlich eine Zusatzversicherung abschließen? Begründen Sie Ihre Meinung.</p>
-                <textarea id="aufgabe7" rows="6" placeholder="Ihre persönliche Meinung und Begründung..."></textarea>
+                <textarea id="aufgabe6" rows="6" placeholder="Ihre persönliche Meinung und Begründung..."></textarea>
             </div>
 
             <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 6</button>
@@ -505,7 +463,6 @@
             const aufg1 = document.querySelector('input[name="aufg1_frage"]:checked');
             const feedback1 = document.getElementById('feedback_aufg1');
             
-            // Markiere alle Optionen
             document.querySelectorAll('input[name="aufg1_frage"]').forEach(input => {
                 const label = input.closest('label');
                 if (input.value === 'b') {
@@ -533,7 +490,6 @@
             const aufg2values = Array.from(aufg2checks).map(cb => cb.value);
             const feedback2a = document.getElementById('feedback_aufg2a');
             
-            // Markiere Checkboxen
             document.querySelectorAll('input[name="aufg2_deckt"]').forEach(input => {
                 const label = input.closest('label');
                 if ((input.value === 'lotfaelle' || input.value === 'planbar') && input.checked) {
@@ -554,10 +510,30 @@
                 feedback2a.textContent = '✗ Nicht ganz. Die Grundversicherung deckt große Lotfälle ab. Zahnbehandlungen werden als Beispiel für etwas genannt, das NICHT abgedeckt ist.';
             }
 
-            // Aufgabe 3a
+            // Aufgabe 2b - Betrag
+            totalCount++;
+            const aufg2bKosten = document.getElementById('aufgabe2b_kosten').value.trim();
+            const feedback2b = document.getElementById('feedback_aufg2b');
+            
+            // Akzeptiere verschiedene Schreibweisen: 5000, 5'000, 5.000, etc.
+            const kostenNormalized = aufg2bKosten.replace(/['\.\s]/g, '');
+            
+            if (kostenNormalized === '5000' || kostenNormalized === '5000CHF') {
+                feedback2b.className = 'feedback correct';
+                feedback2b.textContent = '✓ Richtig! Frau Keller musste 5\'000 CHF für die Zahnbehandlung bezahlen.';
+                correctCount++;
+            } else if (aufg2bKosten === '') {
+                feedback2b.className = 'feedback incorrect';
+                feedback2b.textContent = '❌ Bitte geben Sie den Betrag ein.';
+            } else {
+                feedback2b.className = 'feedback incorrect';
+                feedback2b.textContent = '✗ Nicht richtig. Hören Sie nochmal bei ca. 01:00 genau hin.';
+            }
+
+            // Aufgabe 3
             totalCount++;
             const aufg3 = document.querySelector('input[name="aufg3_vogel"]:checked');
-            const feedback3a = document.getElementById('feedback_aufg3a');
+            const feedback3 = document.getElementById('feedback_aufg3');
             
             document.querySelectorAll('input[name="aufg3_vogel"]').forEach(input => {
                 const label = input.closest('label');
@@ -569,67 +545,15 @@
             });
             
             if (!aufg3) {
-                feedback3a.className = 'feedback incorrect';
-                feedback3a.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
+                feedback3.className = 'feedback incorrect';
+                feedback3.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
             } else if (aufg3.value === 'b') {
-                feedback3a.className = 'feedback correct';
-                feedback3a.textContent = '✓ Richtig! Herr Vogel findet wegen seines Diabetes keine Zusatzversicherung.';
+                feedback3.className = 'feedback correct';
+                feedback3.textContent = '✓ Richtig! Herr Vogel findet wegen seines Diabetes keine Zusatzversicherung.';
                 correctCount++;
             } else {
-                feedback3a.className = 'feedback incorrect';
-                feedback3a.textContent = '✗ Nicht richtig. Was ist das Besondere an der Zusatzversicherung bei der Gesundheitsprüfung?';
-            }
-
-            // Aufgabe 3b1
-            totalCount++;
-            const aufg3b1 = document.querySelector('input[name="aufg3b_grund"]:checked');
-            const feedback3b1 = document.getElementById('feedback_aufg3b1');
-            
-            document.querySelectorAll('input[name="aufg3b_grund"]').forEach(input => {
-                const label = input.closest('label');
-                if (input.value === 'richtig') {
-                    label.classList.add('answer-correct');
-                } else if (aufg3b1 && aufg3b1.value === input.value && input.value !== 'richtig') {
-                    label.classList.add('answer-incorrect');
-                }
-            });
-            
-            if (!aufg3b1) {
-                feedback3b1.className = 'feedback incorrect';
-                feedback3b1.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
-            } else if (aufg3b1.value === 'richtig') {
-                feedback3b1.className = 'feedback correct';
-                feedback3b1.textContent = '✓ Richtig! Die Grundversicherung muss jeden aufnehmen.';
-                correctCount++;
-            } else {
-                feedback3b1.className = 'feedback incorrect';
-                feedback3b1.textContent = '✗ Falsch. Die Grundversicherung basiert auf Solidarität.';
-            }
-
-            // Aufgabe 3b2
-            totalCount++;
-            const aufg3b2 = document.querySelector('input[name="aufg3b_zusatz"]:checked');
-            const feedback3b2 = document.getElementById('feedback_aufg3b2');
-            
-            document.querySelectorAll('input[name="aufg3b_zusatz"]').forEach(input => {
-                const label = input.closest('label');
-                if (input.value === 'richtig') {
-                    label.classList.add('answer-correct');
-                } else if (aufg3b2 && aufg3b2.value === input.value && input.value !== 'richtig') {
-                    label.classList.add('answer-incorrect');
-                }
-            });
-            
-            if (!aufg3b2) {
-                feedback3b2.className = 'feedback incorrect';
-                feedback3b2.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
-            } else if (aufg3b2.value === 'richtig') {
-                feedback3b2.className = 'feedback correct';
-                feedback3b2.textContent = '✓ Richtig! Die Zusatzversicherung kann Personen ablehnen.';
-                correctCount++;
-            } else {
-                feedback3b2.className = 'feedback incorrect';
-                feedback3b2.textContent = '✗ Falsch. Die Zusatzversicherung ist ein Privatgeschäft.';
+                feedback3.className = 'feedback incorrect';
+                feedback3.textContent = '✗ Nicht richtig. Was ist das Besondere an der Zusatzversicherung bei der Gesundheitsprüfung?';
             }
 
             // Aufgabe 4
@@ -659,33 +583,7 @@
                 feedback4.textContent = '✗ Nicht ganz. Achten Sie auf: Spezialistenwahl, Spital außerhalb Kanton, Kontrolle/Selbstbestimmung.';
             }
 
-            // Aufgabe 5
-            totalCount++;
-            const aufg5 = document.querySelector('input[name="aufg5_qualitaet"]:checked');
-            const feedback5 = document.getElementById('feedback_aufg5');
-            
-            document.querySelectorAll('input[name="aufg5_qualitaet"]').forEach(input => {
-                const label = input.closest('label');
-                if (input.value === 'b') {
-                    label.classList.add('answer-correct');
-                } else if (aufg5 && aufg5.value === input.value && input.value !== 'b') {
-                    label.classList.add('answer-incorrect');
-                }
-            });
-            
-            if (!aufg5) {
-                feedback5.className = 'feedback incorrect';
-                feedback5.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
-            } else if (aufg5.value === 'b') {
-                feedback5.className = 'feedback correct';
-                feedback5.textContent = '✓ Richtig! Die allgemeine Abteilung hat in der Schweiz einen extrem hohen Standard.';
-                correctCount++;
-            } else {
-                feedback5.className = 'feedback incorrect';
-                feedback5.textContent = '✗ Nicht richtig. Was wird über den internationalen Vergleich gesagt?';
-            }
-
-            // Aufgabe 6 - Zuordnungen
+            // Aufgabe 5 - Zuordnungen (vorher Aufgabe 6)
             const zuordnungen = [
                 {name: 'zuord1', correct: 'g', feedback: 'feedback_zuord1', text: 'Grundversicherung ist obligatorisch (Pflicht)'},
                 {name: 'zuord2', correct: 'z', feedback: 'feedback_zuord2', text: 'Zusatzversicherung kann ablehnen'},
@@ -702,7 +600,6 @@
                 const selected = document.querySelector(`input[name="${z.name}"]:checked`);
                 const feedbackEl = document.getElementById(z.feedback);
                 
-                // Markiere die Labels
                 document.querySelectorAll(`input[name="${z.name}"]`).forEach(input => {
                     const label = input.closest('label');
                     if (input.value === z.correct) {
