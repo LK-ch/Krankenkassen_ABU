@@ -681,6 +681,146 @@
             
             // Weitere Schritte würden hier folgen...
             
+            // Schritt 2: Franchise verstehen
+            if (answers['health_status'] || answers['fall1_franchise'] || answers['franchise_reasoning']) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 2: Franchise verstehen', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                // Persönliche Franchise-Berechnung
+                if (answers['health_status'] || answers['savings'] || answers['past_costs']) {
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Meine Franchise-Berechnung:', margin, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    if (answers['health_status']) {
+                        const healthMap = {
+                            'gesund': 'Meistens gesund, max 2x beim Arzt im Jahr',
+                            'mittel': '3-5x pro Jahr zum Arzt',
+                            'oft': 'Oft beim Arzt / oft krank'
+                        };
+                        doc.text('Gesundheitszustand: ' + (healthMap[answers['health_status']] || answers['health_status']), margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['savings']) {
+                        const savingsMap = {
+                            '0': '0 CHF verfügbar',
+                            '1000': 'Etwa 1000 CHF verfügbar',
+                            '3000': '3000 CHF oder mehr verfügbar'
+                        };
+                        doc.text('Ersparnisse: ' + (savingsMap[answers['savings']] || answers['savings']), margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['past_costs']) {
+                        doc.text('Bisherige Kosten: ' + answers['past_costs'] + ' CHF pro Jahr', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    yPos += 5;
+                }
+                
+                // Fallbeispiele
+                if (answers['fall1_franchise'] || answers['fall2_franchise'] || answers['fall3_franchise']) {
+                    if (yPos > 230) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Fallbeispiele - Franchise-Empfehlungen:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    if (answers['fall1_franchise']) {
+                        const franchiseMap = {
+                            '300': '300 CHF - Niedrige Franchise',
+                            '1000': '1000 CHF - Mittlere Franchise',
+                            '2500': '2500 CHF - Hohe Franchise'
+                        };
+                        doc.text('Fall 1 (Anna - sehr gesund, 5000 CHF gespart):', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.text('Empfehlung: ' + (franchiseMap[answers['fall1_franchise']] || answers['fall1_franchise']), margin + 10, yPos);
+                        yPos += lineHeight + 2;
+                    }
+                    
+                    if (answers['fall2_franchise']) {
+                        if (yPos > 260) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        const franchiseMap = {
+                            '300': '300 CHF - Niedrige Franchise',
+                            '1000': '1000 CHF - Mittlere Franchise',
+                            '2500': '2500 CHF - Hohe Franchise'
+                        };
+                        doc.text('Fall 2 (Herr Meier - Diabetes, 8x Arzt, 500 CHF gespart):', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.text('Empfehlung: ' + (franchiseMap[answers['fall2_franchise']] || answers['fall2_franchise']), margin + 10, yPos);
+                        yPos += lineHeight + 2;
+                    }
+                    
+                    if (answers['fall3_franchise']) {
+                        if (yPos > 260) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        const franchiseMap = {
+                            '300': '300 CHF - Niedrige Franchise',
+                            '1000': '1000 CHF - Mittlere Franchise',
+                            '2500': '2500 CHF - Hohe Franchise'
+                        };
+                        doc.text('Fall 3 (Sarah - 3-4x Arzt, 2500 CHF gespart):', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.text('Empfehlung: ' + (franchiseMap[answers['fall3_franchise']] || answers['fall3_franchise']), margin + 10, yPos);
+                        yPos += lineHeight + 2;
+                    }
+                    
+                    yPos += 5;
+                }
+                
+                // Reflexion/Begründung
+                if (answers['franchise_reasoning'] && answers['franchise_reasoning'].trim() !== '') {
+                    if (yPos > 240) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Reflexion - Zusammenhänge:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const reasoningLines = doc.splitTextToSize(answers['franchise_reasoning'], pageWidth);
+                    for (let line of reasoningLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                }
+                
+                yPos += 10;
+            }
+            
             doc.setFontSize(9);
             doc.setTextColor(128);
             doc.text('Ende des Lernjournals', 105, 285, { align: 'center' });
