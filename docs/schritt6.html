@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schritt 6: Abschlussübung</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            color: white;
+            padding: 25px 40px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        main {
+            padding: 40px;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #d4a373;
+        }
+        .task h2 {
+            color: #a67c52;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .task h3 {
+            color: #a67c52;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #e65100;
+        }
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d4a373;
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px 10px 0;
+        }
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background: #d4a373;
+            color: white;
+            font-weight: 600;
+        }
+        ul {
+            margin: 10px 0 15px 20px;
+            line-height: 1.8;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-top: 10px;
+            color: #495057;
+        }
+        @media (max-width: 768px) {
+            main { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+        }
+    </style>
 
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>Schritt 6: Abschlussübung</h1>
+        </header>
+
+        <main>
+            
+            <div class="info-box">
+                <strong>🎯 Umfassende Abschlussaufgabe:</strong> In diesem letzten Schritt wenden Sie ALLE gelernten Konzepte an: Franchise-Wahl, Prämienvergleich, Kostenberechnung und Zusatzversicherungen.
+            </div>
+
+            <div class="task">
+                <h2>📋 Fallbeispiel: Yara (Gesamtberatung)</h2>
+                
+                <div style="background:#fff3e0; padding:20px; border-radius:8px; margin:20px 0;">
+                    <h3 style="color:#e65100; margin-top:0;">Ausgangssituation</h3>
+                    <p style="line-height:1.8; margin-top:10px;">
+                        <strong>Yara</strong> (Jahrgang 2000) hat gerade ihre KV-Ausbildung abgeschlossen und arbeitet nun in <strong>Luzern</strong> als Kauffrau. Sie verdient 4'500 CHF pro Monat und hat bisher 3'500 CHF gespart. 
+                    </p>
+                    <p style="line-height:1.8; margin-top:10px;">
+                        Yara war in den letzten drei Jahren sehr gesund und musste nur 2x pro Jahr zum Hausarzt für Routinekontrollen. Sie macht viel Sport (Fitness und Joggen) und achtet auf ihre Gesundheit.
+                    </p>
+                    <p style="line-height:1.8; margin-top:10px;">
+                        Jetzt muss Yara ihre Krankenkasse selbst wählen und ist unsicher, welche Entscheidungen sie treffen soll.
+                    </p>
+                </div>
+
+                <h3>Aufgabe a) 💰 Franchise-Wahl begründen</h3>
+                <p>Welche Franchise würden Sie Yara empfehlen? Berücksichtigen Sie dabei:</p>
+                <ul>
+                    <li>Ihren Gesundheitszustand (sehr gesund, 2x Arzt/Jahr)</li>
+                    <li>Ihre finanziellen Ressourcen (3'500 CHF gespart)</li>
+                    <li>Ihre bisherigen Arztkosten (niedrig)</li>
+                </ul>
+                <div style="margin:15px 0;">
+                    <label>Empfohlene Franchise:</label>
+                    <select id="yara_franchise">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="300">300 CHF</option>
+                        <option value="500">500 CHF</option>
+                        <option value="1000">1000 CHF</option>
+                        <option value="1500">1500 CHF</option>
+                        <option value="2000">2000 CHF</option>
+                        <option value="2500">2500 CHF</option>
+                    </select>
+                </div>
+                <textarea id="yara_franchise_begruendung" rows="5" placeholder="Begründen Sie Ihre Empfehlung ausführlich..."></textarea>
+
+                <h3>Aufgabe b) 📊 Prämienvergleich durchführen</h3>
+                <p>Yara wohnt in Luzern. Recherchieren Sie auf swupp.ch und notieren Sie:</p>
+                <div style="margin:15px 0;">
+                    <label>Mit Ihrer empfohlenen Franchise - Günstigste Krankenkasse:</label>
+                    <input type="text" id="yara_guenstigste" placeholder="Name der Kasse, Prämie pro Monat">
+                </div>
+                <div style="margin:15px 0;">
+                    <label>Mit Ihrer empfohlenen Franchise - Teuerste Krankenkasse:</label>
+                    <input type="text" id="yara_teuerste" placeholder="Name der Kasse, Prämie pro Monat">
+                </div>
+                <div style="margin:15px 0;">
+                    <label>Preisunterschied pro Monat:</label>
+                    <input type="number" id="yara_preisunterschied" placeholder="Differenz in CHF">
+                </div>
+                <div style="margin:15px 0;">
+                    <label>Ihre Empfehlung für Yara (welche Kasse?):</label>
+                    <textarea id="yara_kasse_empfehlung" rows="3" placeholder="Welche Kasse empfehlen Sie und warum?"></textarea>
+                </div>
+
+                <h3>Aufgabe c) 🧮 Kostenberechnung für 2024</h3>
+                <p>Leider war 2024 ein schwieriges Jahr für Yara. Sie hatte folgende Arztkosten:</p>
+                
+                <div style="margin:20px 0; padding:20px; background:#f8f9fa; border-radius:8px;">
+                    <table>
+                        <tr>
+                            <th>Monat</th>
+                            <th>Grund</th>
+                            <th>Kosten</th>
+                        </tr>
+                        <tr>
+                            <td>März</td>
+                            <td>Hausarzt (Lungenentzündung)</td>
+                            <td>340 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>April-Mai</td>
+                            <td>Physiotherapie (5x à 95 CHF)</td>
+                            <td>475 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>August</td>
+                            <td>Notfall (Sportunfall - verstauchter Knöchel)</td>
+                            <td>520 CHF</td>
+                        </tr>
+                        <tr>
+                            <td>November</td>
+                            <td>Hausarzt (Grippe)</td>
+                            <td>125 CHF</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p><strong>Berechnen Sie mit der von Ihnen empfohlenen Franchise:</strong></p>
+                <textarea id="yara_berechnung" rows="10" placeholder="Zeigen Sie den kompletten Rechnungsweg:
+1) Gesamtkosten zusammenzählen
+2) Franchise abziehen  
+3) Selbstbehalt berechnen (10% vom Rest, max. 700 CHF)
+4) Aufteilung: Was zahlt Yara? Was zahlt die Kasse?"></textarea>
+
+                <h3>Aufgabe d) ➕ Zusatzversicherung sinnvoll?</h3>
+                <p>Yara überlegt sich, eine Zusatzversicherung abzuschließen. Sie interessiert sich besonders für:</p>
+                <ul>
+                    <li>Zahnbehandlungen (sie hatte als Kind eine Zahnspange)</li>
+                    <li>Fitnesscenter-Abo-Beitrag</li>
+                    <li>Halbprivat-Abteilung im Spital</li>
+                </ul>
+                
+                <div style="margin:15px 0;">
+                    <label>Würden Sie Yara eine Zusatzversicherung empfehlen?</label>
+                    <select id="yara_zusatz_empfehlung">
+                        <option value="">-- Wählen Sie --</option>
+                        <option value="ja">Ja, auf jeden Fall</option>
+                        <option value="teilweise">Ja, aber nur bestimmte Module</option>
+                        <option value="nein">Nein, nicht nötig</option>
+                    </select>
+                </div>
+                <textarea id="yara_zusatz_begruendung" rows="6" placeholder="Begründen Sie Ihre Empfehlung. Berücksichtigen Sie:
+- Yaras Einkommen (4'500 CHF/Monat)
+- Ihre Interessen (Fitness, Sport)
+- Ihre Gesundheit (normalerweise gesund)
+- Kosten der Zusatzversicherung vs. Nutzen"></textarea>
+
+                <h3>Aufgabe e) 📝 Gesamtberatung zusammenfassen</h3>
+                <p><strong>Fassen Sie Ihre komplette Beratung für Yara zusammen:</strong></p>
+                <textarea id="yara_gesamtberatung" rows="7" placeholder="Schreiben Sie eine kurze, professionelle Zusammenfassung Ihrer Beratung:
+- Empfohlene Franchise und Begründung
+- Empfohlene Krankenkasse und monatliche Prämie
+- Geschätzte Gesamtkosten pro Jahr (Prämien + eigene Arztkosten)
+- Empfehlung zur Zusatzversicherung
+- Abschließender Rat"></textarea>
+            </div>
+
+            <button class="btn-success" onclick="completeAllSteps()">🎉 Lernpfad abschließen</button>
+        
+        </main>
+    </div>
+
+    <script>
+        let progress = JSON.parse(localStorage.getItem('kkLearningProgress')) || {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {}
+        };
+
+        function saveData(key, value) {
+            progress.answers[key] = value;
+            localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+        }
+
+        function loadData() {
+            const answers = progress.answers;
+            for (let key in answers) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = answers[key];
+                }
+            }
+        }
+
+        function completeAllSteps() {
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    saveData(input.id, input.value);
+                }
+            });
+
+            if (!progress.completedPoints.includes(6)) {
+                progress.completedPoints.push(6);
+                localStorage.setItem('kkLearningProgress', JSON.stringify(progress));
+            }
+
+            alert('🎉 Herzlichen Glückwunsch! Sie haben den gesamten Lernpfad erfolgreich abgeschlossen!\n\nKlicken Sie auf "OK" um zur Übersicht zurückzukehren und Ihr Lernjournal als PDF herunterzuladen.');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (input.id) {
+                        saveData(input.id, input.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
