@@ -9,24 +9,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #7dd3c0;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
             min-height: 100vh;
             padding: 20px;
-            position: relative;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('KBild.webp') center/cover fixed;
-            opacity: 0.15;
-            z-index: -1;
-        }
+        .container {
             max-width: 900px;
             margin: 0 auto;
             background: white;
@@ -35,7 +22,7 @@
             overflow: hidden;
         }
         header {
-            background: linear-gradient(135deg, rgba(125, 211, 192, 0.95) 0%, rgba(77, 184, 168, 0.95) 100%), url('KBild.webp') center/cover fixed;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
             color: white;
             padding: 25px 40px;
             position: relative;
@@ -69,10 +56,10 @@
             padding: 25px;
             border-radius: 10px;
             margin-bottom: 25px;
-            border-left: 4px solid #4db8a8;
+            border-left: 4px solid #d4a373;
         }
         .task h2 {
-            color: #2d8b7c;
+            color: #a67c52;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
@@ -96,7 +83,7 @@
         }
         textarea:focus, input:focus, select:focus {
             outline: none;
-            border-color: #4db8a8;
+            border-color: #d4a373;
         }
         textarea {
             min-height: 60px;
@@ -113,7 +100,7 @@
             margin: 10px 5px 10px 0;
         }
         .btn-primary {
-            background: linear-gradient(135deg, rgba(125, 211, 192, 0.95) 0%, rgba(77, 184, 168, 0.95) 100%), url('KBild.webp') center/cover fixed;
+            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
             color: white;
         }
         .btn-primary:hover {
@@ -138,7 +125,7 @@
             border-bottom: 1px solid #dee2e6;
         }
         th {
-            background: #4db8a8;
+            background: #d4a373;
             color: white;
             font-weight: 600;
         }
@@ -152,13 +139,13 @@
             transition: all 0.3s;
         }
         .quiz-option:hover {
-            border-color: #4db8a8;
+            border-color: #d4a373;
             background: #f8f9fa;
         }
         .quiz-option.selected {
-            background: #4db8a8;
+            background: #d4a373;
             color: white;
-            border-color: #4db8a8;
+            border-color: #d4a373;
         }
         .feedback {
             margin-top: 10px;
@@ -196,7 +183,7 @@
         <main>
             
             <div class="task">
-                <h2>💭 Erste Gedanken</h2>
+                <h2>Auftrag a) 💭 Erste Gedanken</h2>
                 <p>Nehmen wir an es ist Winter und Sie erwischen eine Grippe. Da Sie auch Fieber haben, gehen Sie zu Ihrer Ärztin um abzuchecken, ob alles normal verläuft. Sie werden gründlich untersucht und erhalten Medikamente, damit es Ihnen bald besser geht. Zur Sicherheit wird noch ein Bluttest gemacht um sicher zu gehen, dass Sie keine Entzündung haben.</p>
                 <p style="margin-top:15px;"><strong>Wenige Wochen später erhalten Sie eine Rechnung von CHF 250.-</strong></p>
                 <p style="margin-top:15px;">Wer bezahlt nun wie viel dieser Rechnung? Notieren Sie Ihre Vermutungen:</p>
@@ -204,7 +191,7 @@
             </div>
 
             <div class="task">
-                <h2>💰 Woher kommt das Geld?</h2>
+                <h2>Auftrag b) 💰 Woher kommt das Geld?</h2>
                 <p>Wenn Sie mal krank sind und zum Arzt gehen müssen, hilft Ihnen die Krankenkasse bei der Bezahlung der Rechnungen. Aber woher hat die Krankenkasse das Geld? Notieren Sie Ihre Überlegungen:</p>
                 <textarea id="answer_b" rows="2" placeholder="Woher hat die Krankenkasse das Geld?"></textarea>
             </div>
@@ -336,7 +323,7 @@
             if (allCorrect) {
                 overallFeedback.innerHTML = '<div style="background:#d4edda; padding:20px; border-radius:8px; border:2px solid #28a745; color:#155724; font-weight:bold; text-align:center;">🎉 Ausgezeichnet! Alle Begriffe sind richtig zugeordnet!</div>';
             } else {
-                overallFeedback.innerHTML = '<div style="background:#ecf0f1; padding:15px; border-radius:8px; border:2px solid #e74c3c; color:#856404;">💡 Tipp: Überlegen Sie nochmal genau, welcher Begriff zu welcher Definition passt.</div>';
+                overallFeedback.innerHTML = '<div style="background:#fff3cd; padding:15px; border-radius:8px; border:2px solid #ffc107; color:#856404;">💡 Tipp: Überlegen Sie nochmal genau, welcher Begriff zu welcher Definition passt.</div>';
             }
         }
 
