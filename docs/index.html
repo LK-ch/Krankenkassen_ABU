@@ -18,44 +18,14 @@
             min-height: 100vh;
             padding: 20px;
         }
-.container { 
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    overflow: hidden;
 
-    /* Hintergrundbild transparent nur im Container */
-    background: 
-        linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),
-        url('images/KKChBild.webp') no-repeat center;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    position: relative;
-    padding: 20px; /* Platz für Titel und Inhalt */
-}
-
-/* Farbige Fläche hinter dem Titel */
-.title-wrapper {
-    background-color: rgba(255, 255, 255, 0.8); /* hell, leicht transparent */
-    display: inline-block;  /* nur so breit wie der Text */
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.title-wrapper h1 {
-    margin: 0;
-    color: #000; /* Textfarbe */
-}
-
-.title-wrapper p {
-    margin: 5px 0 0 0;
-    color: #333; /* Untertitel-Farbe */
-}
-
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-image: url('images/KKChBild.webp');
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         header {
@@ -197,7 +167,7 @@
             background: #f5f5f5;
             border-color: #bdbdbd;
             cursor: not-allowed;
-            opacity: 1;
+            opacity: 0.6;
         }
 
         .card.locked:hover {
