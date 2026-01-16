@@ -25,10 +25,28 @@
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
+
+    /* Transparentes Hintergrundbild nur im Container */
     background: 
         linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),
-        url('images/KKChBild.webp') no-repeat center/cover;
-    background-size: contain;
+        url('images/KKChBild.webp') no-repeat center;
+    background-size: contain; /* Bild bleibt innerhalb des Containers */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Optional: Containerhöhe anpassen, falls nötig */
+    height: 300px; /* z.B. Höhe definieren */
+    position: relative; /* damit Text relativ positioniert wird */
+}
+
+/* Text über dem Hintergrundbild */
+.container h1,
+.container p {
+    position: relative; /* Text bleibt über dem Hintergrund */
+    z-index: 1;
+    padding: 20px;
+    color: #000; /* Textfarbe gut lesbar machen */
+}
 }
 
         }
