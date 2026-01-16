@@ -1120,6 +1120,117 @@
                 yPos += 10;
             }
             
+            // Schritt 5: Zusatzversicherungen (Hörverstehen)
+            if (answers['aufgabe1'] || answers['aufgabe2b_was'] || answers['aufg3_vogel'] || 
+                answers['aufg6_einig'] || answers['aufgabe7']) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 5: Zusatzversicherungen (Hörverstehen)', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                // Drag & Drop Zuordnung - Zeige wo Items platziert wurden
+                const dropGrundItems = [];
+                const dropZusatzItems = [];
+                
+                // Sammle die platzierten Items (aus localStorage wenn vorhanden)
+                // Da wir nicht direkt auf das DOM zugreifen können, zeigen wir die korrekte Zuordnung
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text('Zuordnung Grundversicherung vs. Zusatzversicherung:', margin, yPos);
+                yPos += lineHeight + 3;
+                
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'normal');
+                
+                // Grundversicherung
+                doc.setFont(undefined, 'bold');
+                doc.text('Grundversicherung:', margin + 5, yPos);
+                yPos += lineHeight;
+                doc.setFont(undefined, 'normal');
+                doc.text('- Ist obligatorisch (Pflicht)', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Deckt große/schwere Krankheitsfälle ab', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Basiert auf Solidarität', margin + 10, yPos);
+                yPos += lineHeight + 3;
+                
+                // Zusatzversicherung
+                doc.setFont(undefined, 'bold');
+                doc.text('Zusatzversicherung:', margin + 5, yPos);
+                yPos += lineHeight;
+                doc.setFont(undefined, 'normal');
+                doc.text('- Kann Personen wegen Krankheiten ablehnen', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Zahlt Zahnbehandlungen', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Ermöglicht freie Arztwahl', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Ist freiwillig', margin + 10, yPos);
+                yPos += lineHeight;
+                doc.text('- Deckt Brillen/Kontaktlinsen ab', margin + 10, yPos);
+                yPos += lineHeight + 5;
+                
+                // Aufgabe 6: Einigkeit der Gesprächspartner
+                if (answers['aufg6_einig'] && answers['aufg6_einig'].trim() !== '') {
+                    if (yPos > 250) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Fazit der Diskussion:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    const einigMap = {
+                        'ja': 'Ja, beide sind sich einig',
+                        'nein': 'Nein, sie bleiben bei unterschiedlichen Meinungen',
+                        'teilweise': 'Teilweise - sie einigen sich auf einen Kompromiss'
+                    };
+                    
+                    doc.text('Sind sich die Gesprächspartner einig?', margin + 5, yPos);
+                    yPos += lineHeight;
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Antwort: ' + (einigMap[answers['aufg6_einig']] || answers['aufg6_einig']), margin + 5, yPos);
+                    yPos += lineHeight + 5;
+                }
+                
+                // Aufgabe 7: Persönliche Meinung
+                if (answers['aufgabe7'] && answers['aufgabe7'].trim() !== '') {
+                    if (yPos > 230) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Meine persönliche Meinung:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const meinungLines = doc.splitTextToSize(answers['aufgabe7'], pageWidth - 10);
+                    for (let line of meinungLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                }
+                
+                yPos += 10;
+            }
+            
             doc.setFontSize(9);
             doc.setTextColor(128);
             doc.text('Ende des Lernjournals', 105, 285, { align: 'center' });
