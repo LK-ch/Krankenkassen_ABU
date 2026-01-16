@@ -180,6 +180,45 @@
             border-radius: 4px !important;
             margin: 2px 0 !important;
         }
+        .draggable-item {
+            background: white;
+            border: 2px solid #d4a373;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: move;
+            user-select: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .draggable-item:hover {
+            background: #f8f9fa;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .draggable-item.dragging {
+            opacity: 0.5;
+            transform: rotate(3deg);
+        }
+        .drop-zone {
+            transition: all 0.3s;
+        }
+        .drop-zone.drag-over {
+            background: #fff !important;
+            border-style: solid !important;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        .drop-zone .draggable-item {
+            margin: 5px;
+        }
+        .draggable-item.correct-placement {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+        .draggable-item.incorrect-placement {
+            border-color: #f44336;
+            background: #ffebee;
+        }
         @media (max-width: 768px) {
             main { padding: 20px; }
             header h1 { font-size: 1.5em; }
@@ -218,9 +257,9 @@
                     <ul style="margin:10px 0 0 20px; line-height:1.8;">
                         <li><strong>Lotfälle:</strong> Sehr schwere Krankheitsfälle, die viel kosten (z.B. Krebs, große Operationen)</li>
                         <li><strong>Solidarität:</strong> Zusammenhalt, alle helfen zusammen und unterstützen sich gegenseitig</li>
-                        <li><strong>Existenzbedrohend:</strong> So schlimm, dass man davon in große finanzielle Not gerät</li>
-                        <li><strong>Tragbar:</strong> Man kann es bezahlen, es ist finanziell möglich</li>
-                        <li><strong>Obligatorisch:</strong> Pflicht, man muss es haben (Gegenteil: freiwillig)</li>
+                        <li><strong>existenzbedrohend:</strong> So schlimm, dass man davon in große finanzielle Not gerät</li>
+                        <li><strong>tragbar:</strong> Man kann es bezahlen, es ist finanziell möglich</li>
+                        <li><strong>obligatorisch:</strong> Pflicht, man muss es haben (Gegenteil: freiwillig)</li>
                     </ul>
                 </div>
             </div>
@@ -252,7 +291,7 @@
                 <div style="margin:10px 0 10px 20px;">
                     <label style="display:block; margin:5px 0;">
                         <input type="checkbox" name="aufg2_deckt" value="lotfaelle" style="width:auto; margin-right:10px;">
-                        Große Lotfälle (z.B. Krebs, Notoperationen)
+                        Große/schwere Krankheitsfälle (z.B. Krebs, Notoperationen)
                     </label>
                     <label style="display:block; margin:5px 0;">
                         <input type="checkbox" name="aufg2_deckt" value="zahn" style="width:auto; margin-right:10px;">
@@ -317,97 +356,58 @@
                 <div id="feedback_aufg4" class="feedback"></div>
 
                 <h3 style="margin-top:25px;">Aufgabe 5: Grundversicherung vs. Zusatzversicherung - Zuordnung</h3>
-                <p><strong>Ordnen Sie die Aussagen zu: Gehört es zur Grundversicherung (G) oder Zusatzversicherung (Z)?</strong></p>
+                <p><strong>Ziehen Sie die Aussagen in das richtige Feld:</strong></p>
+                <p style="font-size:0.9em; color:#666; margin-top:5px;"><em>Hinweis: Diese Informationen werden im gesamten Audio verteilt erwähnt (00:16-04:43)</em></p>
                 
-                <div style="margin:20px 0; padding:20px; background:#f8f9fa; border-radius:8px;">
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>1. Ist obligatorisch (Pflicht)</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord1" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord1" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord1" class="feedback"></div>
+                <div style="margin:30px 0;">
+                    <!-- Aussagen zum Ziehen -->
+                    <div style="margin-bottom:25px;">
+                        <p style="font-weight:600; margin-bottom:10px;">Aussagen (ziehen Sie diese in die richtigen Felder):</p>
+                        <div id="draggable-items" style="display:flex; flex-wrap:wrap; gap:10px; padding:15px; background:#f8f9fa; border-radius:8px; min-height:80px;">
+                            <div class="draggable-item" draggable="true" data-answer="g" data-id="1">
+                                Ist obligatorisch (Pflicht)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="z" data-id="2">
+                                Kann Personen wegen Krankheiten ablehnen (ca. 01:46)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="g" data-id="3">
+                                Deckt große/schwere Krankheitsfälle ab (ca. 00:49)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="z" data-id="4">
+                                Zahlt Zahnbehandlungen (ca. 01:00)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="z" data-id="5">
+                                Ermöglicht freie Arztwahl (ca. 02:14)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="g" data-id="6">
+                                Basiert auf Solidarität (ca. 02:00)
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="z" data-id="7">
+                                Ist freiwillig
+                            </div>
+                            <div class="draggable-item" draggable="true" data-answer="z" data-id="8">
+                                Deckt Brillen/Kontaktlinsen ab
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>2. Kann Personen wegen Krankheiten ablehnen</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord2" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord2" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord2" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>3. Deckt große Lotfälle wie Krebs und Notoperationen ab</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord3" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord3" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord3" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>4. Zahlt Zahnbehandlungen</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord4" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord4" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord4" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>5. Ermöglicht freie Arztwahl und Einzelzimmer</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord5" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord5" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord5" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>6. Basiert auf Solidarität - alle helfen zusammen</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord6" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord6" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord6" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>7. Ist freiwillig, man kann selbst entscheiden</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord7" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord7" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord7" class="feedback"></div>
-                    </div>
-                    
-                    <div style="margin:15px 0; padding:10px; background:white; border-radius:5px;">
-                        <strong>8. Deckt Brillen und Kontaktlinsen ab</strong><br>
-                        <label style="display:inline; margin-right:20px;">
-                            <input type="radio" name="zuord8" value="g" style="width:auto; margin:0 5px 0 10px;"> Grundversicherung
-                        </label>
-                        <label style="display:inline;">
-                            <input type="radio" name="zuord8" value="z" style="width:auto; margin:0 5px 0 10px;"> Zusatzversicherung
-                        </label>
-                        <div id="feedback_zuord8" class="feedback"></div>
+
+                    <!-- Drop-Bereiche -->
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                        <div>
+                            <h4 style="color:#4CAF50; margin-bottom:10px;">Grundversicherung</h4>
+                            <div id="drop-grund" class="drop-zone" data-type="g" style="min-height:200px; padding:15px; background:#e8f5e9; border:3px dashed #4CAF50; border-radius:8px;">
+                                <p style="color:#666; font-style:italic;">Ziehen Sie die passenden Aussagen hierher</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color:#ff9800; margin-bottom:10px;">Zusatzversicherung</h4>
+                            <div id="drop-zusatz" class="drop-zone" data-type="z" style="min-height:200px; padding:15px; background:#fff3e0; border:3px dashed #ff9800; border-radius:8px;">
+                                <p style="color:#666; font-style:italic;">Ziehen Sie die passenden Aussagen hierher</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div id="feedback_aufg5" class="feedback"></div>
 
                 <div style="text-align:center; margin:30px 0;">
                     <button class="btn-success" onclick="checkAnswers()" style="font-size:1.1em; padding:15px 40px;">
@@ -416,9 +416,28 @@
                 </div>
                 <div id="overall_feedback" style="margin-top:20px;"></div>
 
-                <h3 style="margin-top:35px;">Aufgabe 6: Ihre persönliche Meinung</h3>
+                <h3 style="margin-top:35px;">Aufgabe 6: Fazit der Diskussion (04:11-05:07)</h3>
+                <p><strong>Am Ende der Diskussion ziehen beide Seiten ein Fazit. Sind sich die beiden Gesprächspartner einig über die Notwendigkeit einer Zusatzversicherung?</strong></p>
+                
+                <div style="margin:15px 0 10px 20px;">
+                    <label style="display:block; margin:8px 0; padding:10px; background:#f8f9fa; border-radius:5px; cursor:pointer;">
+                        <input type="radio" name="aufg6_einig" value="ja" style="width:auto; margin-right:10px;">
+                        Ja, beide sind sich einig, dass eine Zusatzversicherung notwendig ist
+                    </label>
+                    <label style="display:block; margin:8px 0; padding:10px; background:#f8f9fa; border-radius:5px; cursor:pointer;">
+                        <input type="radio" name="aufg6_einig" value="nein" style="width:auto; margin-right:10px;">
+                        Nein, sie bleiben bei unterschiedlichen Meinungen
+                    </label>
+                    <label style="display:block; margin:8px 0; padding:10px; background:#f8f9fa; border-radius:5px; cursor:pointer;">
+                        <input type="radio" name="aufg6_einig" value="teilweise" style="width:auto; margin-right:10px;">
+                        Teilweise - sie einigen sich auf einen Kompromiss
+                    </label>
+                </div>
+                <div id="feedback_aufg6" class="feedback"></div>
+
+                <h3 style="margin-top:35px;">Aufgabe 7: Ihre persönliche Meinung</h3>
                 <p>Nach dem Hören dieser Diskussion: Welche Seite überzeugt Sie mehr? Würden Sie persönlich eine Zusatzversicherung abschließen? Begründen Sie Ihre Meinung.</p>
-                <textarea id="aufgabe6" rows="6" placeholder="Ihre persönliche Meinung und Begründung..."></textarea>
+                <textarea id="aufgabe7" rows="6" placeholder="Ihre persönliche Meinung und Begründung..."></textarea>
             </div>
 
             <button class="btn-primary" onclick="saveAndContinue()">💾 Speichern und weiter zu Schritt 6</button>
@@ -583,44 +602,80 @@
                 feedback4.textContent = '✗ Nicht ganz. Achten Sie auf: Spezialistenwahl, Spital außerhalb Kanton, Kontrolle/Selbstbestimmung.';
             }
 
-            // Aufgabe 5 - Zuordnungen (vorher Aufgabe 6)
-            const zuordnungen = [
-                {name: 'zuord1', correct: 'g', feedback: 'feedback_zuord1', text: 'Grundversicherung ist obligatorisch (Pflicht)'},
-                {name: 'zuord2', correct: 'z', feedback: 'feedback_zuord2', text: 'Zusatzversicherung kann ablehnen'},
-                {name: 'zuord3', correct: 'g', feedback: 'feedback_zuord3', text: 'Grundversicherung deckt Lotfälle ab'},
-                {name: 'zuord4', correct: 'z', feedback: 'feedback_zuord4', text: 'Zusatzversicherung zahlt Zahnbehandlungen'},
-                {name: 'zuord5', correct: 'z', feedback: 'feedback_zuord5', text: 'Zusatzversicherung ermöglicht freie Arztwahl'},
-                {name: 'zuord6', correct: 'g', feedback: 'feedback_zuord6', text: 'Grundversicherung basiert auf Solidarität'},
-                {name: 'zuord7', correct: 'z', feedback: 'feedback_zuord7', text: 'Zusatzversicherung ist freiwillig'},
-                {name: 'zuord8', correct: 'z', feedback: 'feedback_zuord8', text: 'Zusatzversicherung deckt Brillen ab'}
-            ];
-
-            zuordnungen.forEach(z => {
-                totalCount++;
-                const selected = document.querySelector(`input[name="${z.name}"]:checked`);
-                const feedbackEl = document.getElementById(z.feedback);
+            // Aufgabe 5 - Drag & Drop Zuordnung
+            totalCount += 8; // 8 Aussagen
+            const dropGrund = document.getElementById('drop-grund');
+            const dropZusatz = document.getElementById('drop-zusatz');
+            const feedback5 = document.getElementById('feedback_aufg5');
+            
+            let correctDragDrop = 0;
+            let incorrectDragDrop = 0;
+            
+            // Prüfe alle draggable items
+            document.querySelectorAll('.draggable-item').forEach(item => {
+                const correctAnswer = item.getAttribute('data-answer');
+                const currentParent = item.parentElement;
                 
-                document.querySelectorAll(`input[name="${z.name}"]`).forEach(input => {
-                    const label = input.closest('label');
-                    if (input.value === z.correct) {
-                        label.classList.add('answer-correct');
-                    } else if (selected && selected.value === input.value && input.value !== z.correct) {
-                        label.classList.add('answer-incorrect');
+                // Entferne alte Markierungen
+                item.classList.remove('correct-placement', 'incorrect-placement');
+                
+                if (currentParent.id === 'drop-grund') {
+                    if (correctAnswer === 'g') {
+                        item.classList.add('correct-placement');
+                        correctDragDrop++;
+                        correctCount++;
+                    } else {
+                        item.classList.add('incorrect-placement');
+                        incorrectDragDrop++;
                     }
-                });
-                
-                if (!selected) {
-                    feedbackEl.className = 'feedback incorrect';
-                    feedbackEl.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
-                } else if (selected.value === z.correct) {
-                    feedbackEl.className = 'feedback correct';
-                    feedbackEl.textContent = '✓ Richtig!';
-                    correctCount++;
-                } else {
-                    feedbackEl.className = 'feedback incorrect';
-                    feedbackEl.textContent = `✗ Falsch. ${z.text}`;
+                } else if (currentParent.id === 'drop-zusatz') {
+                    if (correctAnswer === 'z') {
+                        item.classList.add('correct-placement');
+                        correctDragDrop++;
+                        correctCount++;
+                    } else {
+                        item.classList.add('incorrect-placement');
+                        incorrectDragDrop++;
+                    }
                 }
             });
+            
+            if (correctDragDrop === 8) {
+                feedback5.className = 'feedback correct';
+                feedback5.textContent = '✓ Perfekt! Alle Aussagen sind richtig zugeordnet.';
+            } else if (incorrectDragDrop > 0) {
+                feedback5.className = 'feedback incorrect';
+                feedback5.textContent = `✗ Sie haben ${incorrectDragDrop} Aussage(n) falsch zugeordnet. Die falsch platzierten Kästchen sind rot markiert.`;
+            } else {
+                feedback5.className = 'feedback incorrect';
+                feedback5.textContent = '⚠️ Bitte ziehen Sie alle Aussagen in die richtigen Felder.';
+            }
+
+            // Aufgabe 6 - Einigkeit der Gesprächspartner
+            totalCount++;
+            const aufg6 = document.querySelector('input[name="aufg6_einig"]:checked');
+            const feedback6 = document.getElementById('feedback_aufg6');
+            
+            document.querySelectorAll('input[name="aufg6_einig"]').forEach(input => {
+                const label = input.closest('label');
+                if (input.value === 'nein') {
+                    label.classList.add('answer-correct');
+                } else if (aufg6 && aufg6.value === input.value && input.value !== 'nein') {
+                    label.classList.add('answer-incorrect');
+                }
+            });
+            
+            if (!aufg6) {
+                feedback6.className = 'feedback incorrect';
+                feedback6.textContent = '❌ Bitte wählen Sie eine Antwort aus.';
+            } else if (aufg6.value === 'nein') {
+                feedback6.className = 'feedback correct';
+                feedback6.textContent = '✓ Richtig! Die beiden Gesprächspartner bleiben bei unterschiedlichen Meinungen. Es bleibt "eine klare Meinungsverschiedenheit".';
+                correctCount++;
+            } else {
+                feedback6.className = 'feedback incorrect';
+                feedback6.textContent = '✗ Nicht ganz. Hören Sie das Fazit am Ende nochmal genau an (ab 04:43).';
+            }
 
             // Overall feedback
             const percentage = Math.round((correctCount / totalCount) * 100);
@@ -694,7 +749,119 @@
                     }
                 });
             });
+
+            // Drag & Drop Setup
+            setupDragAndDrop();
         });
+
+        function setupDragAndDrop() {
+            const draggableItems = document.querySelectorAll('.draggable-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            draggableItems.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+                
+                // Touch support für Mobile
+                item.addEventListener('touchstart', handleTouchStart, {passive: false});
+                item.addEventListener('touchmove', handleTouchMove, {passive: false});
+                item.addEventListener('touchend', handleTouchEnd);
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+
+            // Auch auf dem ursprünglichen Container
+            const draggableContainer = document.getElementById('draggable-items');
+            draggableContainer.addEventListener('dragover', handleDragOver);
+            draggableContainer.addEventListener('drop', handleDrop);
+            draggableContainer.addEventListener('dragleave', handleDragLeave);
+        }
+
+        let draggedElement = null;
+        let touchClone = null;
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            this.classList.remove('drag-over');
+            
+            if (draggedElement && draggedElement !== this) {
+                // Entferne die Platzhalter-Nachricht
+                const placeholder = this.querySelector('p');
+                if (placeholder && placeholder.style.fontStyle === 'italic') {
+                    placeholder.remove();
+                }
+                this.appendChild(draggedElement);
+            }
+            return false;
+        }
+
+        // Touch-Unterstützung für Mobile
+        function handleTouchStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.preventDefault();
+        }
+
+        function handleTouchMove(e) {
+            if (!draggedElement) return;
+            
+            e.preventDefault();
+            const touch = e.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            if (target && target.classList.contains('drop-zone')) {
+                target.classList.add('drag-over');
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (!draggedElement) return;
+            
+            const touch = e.changedTouches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+            
+            if (target && target.classList.contains('drop-zone')) {
+                const placeholder = target.querySelector('p');
+                if (placeholder && placeholder.style.fontStyle === 'italic') {
+                    placeholder.remove();
+                }
+                target.appendChild(draggedElement);
+            }
+            
+            draggedElement.classList.remove('dragging');
+            draggedElement = null;
+        }
     </script>
 </body>
 </html>
