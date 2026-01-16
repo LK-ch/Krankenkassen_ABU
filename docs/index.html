@@ -18,8 +18,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-
-      .container { 
+.container { 
     max-width: 1200px;
     margin: 0 auto;
     border-radius: 20px;
@@ -34,19 +33,16 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    /* Optional: Containerhöhe anpassen, falls nötig */
-    height: 300px; /* z.B. Höhe definieren */
-    position: relative; /* damit Text relativ positioniert wird */
+    position: relative; /* damit Text über dem Bild liegt */
+    padding: 20px; /* Platz für Text und Inhalt */
 }
 
 /* Text über dem Hintergrundbild */
 .container h1,
 .container p {
-    position: relative; /* Text bleibt über dem Hintergrund */
+    position: relative;
     z-index: 1;
-    padding: 20px;
-    color: #000; /* Textfarbe gut lesbar machen */
-}
+    color: #000; /* Text sichtbar machen */
 }
 
         }
