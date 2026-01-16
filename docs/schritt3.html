@@ -9,7 +9,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            background: url('images/KBild.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
         }
@@ -22,7 +25,7 @@
             overflow: hidden;
         }
         header {
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
             padding: 25px 40px;
             position: relative;
@@ -56,20 +59,23 @@
             padding: 25px;
             border-radius: 10px;
             margin-bottom: 25px;
-            border-left: 4px solid #d4a373;
+            border-left: 4px solid #f39c12;
         }
         .task h2 {
-            color: #a67c52;
+            color: #e67e22;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
         .info-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
             padding: 15px;
             border-radius: 5px;
             margin: 15px 0;
-            color: #e65100;
+            color: #1565c0;
+        }
+        .info-box strong {
+            color: #0d47a1;
         }
         textarea, input[type="text"], input[type="number"], select {
             width: 100%;
@@ -83,7 +89,15 @@
         }
         textarea:focus, input:focus, select:focus {
             outline: none;
-            border-color: #d4a373;
+            border-color: #f39c12;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+        select {
+            cursor: pointer;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+        }
+        select:hover {
+            border-color: #2196F3;
         }
         textarea {
             min-height: 120px;
@@ -100,16 +114,20 @@
             margin: 10px 5px 10px 0;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
         }
         .btn-success {
-            background: #4CAF50;
+            background: linear-gradient(135deg, #2196F3 0%, #1976d2 100%);
             color: white;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
         }
         table {
             width: 100%;
@@ -125,31 +143,21 @@
             border-bottom: 1px solid #dee2e6;
         }
         th {
-            background: #d4a373;
+            background: linear-gradient(135deg, #f39c12 0%, #2196F3 100%);
             color: white;
             font-weight: 600;
         }
-        .quiz-option {
-            padding: 15px;
-            margin: 10px 0;
-            background: white;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .quiz-option:hover {
-            border-color: #d4a373;
-            background: #f8f9fa;
-        }
-        .quiz-option.selected {
-            background: #d4a373;
-            color: white;
-            border-color: #d4a373;
-        }
         @media (max-width: 768px) {
+            body { padding: 10px; }
             main { padding: 20px; }
+            header { padding: 20px; }
             header h1 { font-size: 1.5em; }
+            .back-button {
+                position: static;
+                transform: none;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
         }
     </style>
 
@@ -177,7 +185,6 @@
                     <p style="margin:10px 0;"><em><strong>Wichtig zum Jahrgang:</strong> Falls Sie noch nicht 18 Jahre alt sind, geben Sie zum Beispiel den Jahrgang 2005 ein. Wir schauen die Prämien ab 18 Jahren an, da die Prämien für Kinder und Jugendliche (unter 18) deutlich tiefer sind und nicht mit den Erwachsenentarifen verglichen werden können.</em></p>
                 </div>
 
-                <!-- Swupp eingebettet -->
                 <div style="margin:30px 0;">
                     <iframe 
                         src="https://swupp.ch/krankenkassenvergleich" 
@@ -292,7 +299,6 @@
         }
 
         function loadData() {
-            // Load all saved answers for this step
             const answers = progress.answers;
             for (let key in answers) {
                 const element = document.getElementById(key);
@@ -303,7 +309,6 @@
         }
 
         function saveAndContinue() {
-            // Save all inputs on current page
             const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
             inputs.forEach(input => {
                 if (input.id) {
@@ -311,7 +316,6 @@
                 }
             });
 
-            // Mark step as completed
             if (!progress.completedPoints.includes(3)) {
                 progress.completedPoints.push(3);
                 progress.currentPoint = 4;
@@ -322,11 +326,6 @@
             window.location.href = 'index.html';
         }
 
-        
-        
-        
-
-        // Auto-save on input change
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
             const inputs = document.querySelectorAll('textarea, input[type="text"], input[type="number"], select');
