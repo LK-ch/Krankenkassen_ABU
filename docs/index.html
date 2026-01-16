@@ -14,7 +14,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f3e9d2 0%, #a67c52 100%)
+            background: linear-gradient(135deg, rgba(125, 211, 192, 0.95) 0%, rgba(77, 184, 168, 0.95) 100%), 
+                        url('KBild.webp') center/cover fixed;
             min-height: 100vh;
             padding: 20px;
         }
@@ -22,14 +23,14 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-image: url('images/KBild.webp');
+            background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
 
         header {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: linear-gradient(135deg, #7dd3c0 0%, #4db8a8 100%);
             color: white;
             padding: 25px 40px;
             text-align: center;
@@ -51,16 +52,16 @@
         }
 
         .info-notice {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
+            background: #ecf0f1;
+            border-left: 4px solid #e74c3c;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
-            color: #e65100;
+            color: #2d8b7c;
         }
 
         .info-notice strong {
-            color: #bf360c;
+            color: #e74c3c;
         }
 
         .flowchart-container {
@@ -84,27 +85,31 @@
         }
 
         .arrow-right {
-            font-size: 2.5em;
-            color: #f39c12;
-            font-weight: bold;
+            font-size: 4em;
+            color: #2d8b7c;
+            font-weight: 900;
             animation: slide-right 2s infinite;
             flex-shrink: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .arrow-left {
-            font-size: 2.5em;
-            color: #f39c12;
-            font-weight: bold;
+            font-size: 4em;
+            color: #2d8b7c;
+            font-weight: 900;
             animation: slide-left 2s infinite;
             flex-shrink: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .arrow-turn-down {
             text-align: right;
-            font-size: 2.5em;
-            color: #f39c12;
+            font-size: 4em;
+            color: #2d8b7c;
+            font-weight: 900;
             margin: 5px 0;
             animation: bounce-down 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         @keyframes slide-right {
@@ -130,7 +135,7 @@
 
         .card {
             background: white;
-            border: 3px solid #e0e0e0;
+            border: 3px solid #ecf0f1;
             border-radius: 10px;
             padding: 12px;
             display: flex;
@@ -147,25 +152,26 @@
 
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 15px rgba(77, 184, 168, 0.3);
+            border-color: #4db8a8;
         }
 
         .card.active {
-            background: linear-gradient(135deg, #fff4e6 0%, #ffe0b2 100%);
-            border-color: #f39c12;
+            background: linear-gradient(135deg, #d1f2eb 0%, #a3e4d7 100%);
+            border-color: #48c9b0;
             border-width: 3px;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+            box-shadow: 0 4px 15px rgba(72, 201, 176, 0.3);
         }
 
         .card.completed {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-color: #2196F3;
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            background: linear-gradient(135deg, #d1f2eb 0%, #a3e4d7 100%);
+            border-color: #48c9b0;
+            box-shadow: 0 4px 15px rgba(72, 201, 176, 0.3);
         }
 
         .card.locked {
-            background: #f5f5f5;
-            border-color: #bdbdbd;
+            background: #ecf0f1;
+            border-color: #95a5a6;
             cursor: not-allowed;
             opacity: 0.6;
         }
@@ -201,7 +207,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: #e0e0e0;
+            background: #95a5a6;
             color: white;
             display: flex;
             align-items: center;
@@ -212,21 +218,21 @@
         }
 
         .card.active .card-number {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             animation: pulse-number 2s infinite;
         }
 
         .card.completed .card-number {
-            background: linear-gradient(135deg, #2196F3 0%, #1976d2 100%);
+            background: linear-gradient(135deg, #48c9b0 0%, #16a085 100%);
         }
 
         .card.locked .card-number {
-            background: #bdbdbd;
+            background: #95a5a6;
         }
 
         @keyframes pulse-number {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
         }
 
         .card-content {
@@ -245,29 +251,37 @@
         .card-title {
             font-size: 0.95em;
             font-weight: bold;
-            color: #e67e22;
+            color: #2980b9;
             line-height: 1.2;
         }
 
+        .card.active .card-title {
+            color: #2980b9;
+        }
+
+        .card.completed .card-title {
+            color: #16a085;
+        }
+
         .card.locked .card-title {
-            color: #757575;
+            color: #95a5a6;
         }
 
         .progress-section {
-            background: #f5f5f5;
+            background: #ecf0f1;
             padding: 20px;
             border-radius: 10px;
             margin-top: 15px;
         }
 
         .progress-section h2 {
-            color: #e67e22;
+            color: #2d8b7c;
             margin-bottom: 12px;
             font-size: 1.3em;
         }
 
         .progress-bar {
-            background: #e0e0e0;
+            background: #95a5a6;
             height: 30px;
             border-radius: 15px;
             overflow: hidden;
@@ -275,7 +289,7 @@
         }
 
         .progress-fill {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: linear-gradient(135deg, #7dd3c0 0%, #4db8a8 100%);
             height: 100%;
             transition: width 0.5s ease;
             display: flex;
@@ -308,17 +322,17 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: linear-gradient(135deg, #7dd3c0 0%, #4db8a8 100%);
             color: white;
         }
 
         .btn-info {
-            background: #2196F3;
+            background: #95a5a6;
             color: white;
         }
 
         .btn-success {
-            background: #4CAF50;
+            background: #2d8b7c;
             color: white;
         }
 
@@ -357,7 +371,7 @@
     <div class="container">
         <header>
             <h1>🏥 Lernpfad: Krankenkassen Schweiz</h1>
-            <p>Verstehen Sie das Schweizer Krankenkassensystem Schritt für Schritt</p>
+            <p>Verstehe das Schweizer Krankenkassensystem Schritt für Schritt</p>
         </header>
 
         <main>
@@ -517,16 +531,37 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            doc.setFontSize(22);
+            // Titelseite mit Farbe
+            doc.setFillColor(125, 211, 192); // Türkis
+            doc.rect(0, 0, 210, 297, 'F'); // Volle Seite türkis
+            
+            doc.setTextColor(255, 255, 255); // Weiß
+            doc.setFontSize(28);
             doc.setFont(undefined, 'bold');
-            doc.text('Lernjournal', 105, 100, { align: 'center' });
-            doc.setFontSize(18);
+            doc.text('🏥 Lernjournal', 105, 100, { align: 'center' });
+            doc.setFontSize(22);
             doc.text('Krankenkassen Schweiz', 105, 115, { align: 'center' });
             
-            doc.setFontSize(11);
+            doc.setFontSize(12);
             doc.setFont(undefined, 'normal');
             doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 105, 140, { align: 'center' });
             doc.text(`Abgeschlossene Schritte: ${learningProgress.completedPoints.length} von 6`, 105, 150, { align: 'center' });
+            
+            // Emojis für Schritte
+            doc.setFontSize(14);
+            const steps = ['🩺 Grundlagen', '💰 Franchise', '📊 Prämien', '🧮 Kosten', '➕ Zusatz', '🎓 Abschluss'];
+            let yStep = 170;
+            steps.forEach((step, i) => {
+                const completed = learningProgress.completedPoints.includes(i + 1);
+                if (completed) {
+                    doc.setTextColor(46, 139, 87); // Grün für completed
+                    doc.text('✓ ' + step, 105, yStep, { align: 'center' });
+                } else {
+                    doc.setTextColor(200, 200, 200); // Grau für nicht completed
+                    doc.text('○ ' + step, 105, yStep, { align: 'center' });
+                }
+                yStep += 10;
+            });
             
             doc.addPage();
             
@@ -539,17 +574,30 @@
             const answers = learningProgress.answers;
             
             if (answers['answer_a'] || answers['answer_b'] || answers['def1'] || answers['def2'] || answers['def3']) {
+                // Farbiger Header
+                doc.setFillColor(52, 152, 219); // Blau
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255); // Weiß
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 1: Grundlagen & Begriffe', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('🩺 Schritt 1: Grundlagen & Begriffe', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0); // Zurück zu Schwarz
                 
                 // Auftrag a
                 if (answers['answer_a'] && answers['answer_a'].trim() !== '') {
+                    doc.setFillColor(240, 248, 255); // Hellblau
+                    doc.rect(margin - 3, yPos - 3, pageWidth + 6, 8, 'F');
+                    
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
-                    doc.text('Auftrag a) Erste Vermutungen', margin, yPos);
+                    doc.setTextColor(52, 152, 219);
+                    doc.text('💭 Auftrag a) Erste Vermutungen', margin, yPos);
                     yPos += lineHeight;
+                    
+                    doc.setTextColor(0, 0, 0);
                     
                     doc.setFontSize(11);
                     doc.setFont(undefined, 'normal');
@@ -571,10 +619,16 @@
                         doc.addPage();
                         yPos = 20;
                     }
+                    doc.setFillColor(255, 250, 240); // Helles Beige
+                    doc.rect(margin - 3, yPos - 3, pageWidth + 6, 8, 'F');
+                    
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
-                    doc.text('Auftrag b) Woher kommt das Geld?', margin, yPos);
+                    doc.setTextColor(241, 196, 15);
+                    doc.text('💰 Auftrag b) Woher kommt das Geld?', margin, yPos);
                     yPos += lineHeight;
+                    
+                    doc.setTextColor(0, 0, 0);
                     
                     doc.setFontSize(11);
                     doc.setFont(undefined, 'normal');
@@ -596,10 +650,16 @@
                         doc.addPage();
                         yPos = 20;
                     }
+                    doc.setFillColor(245, 240, 255); // Helles Lila
+                    doc.rect(margin - 3, yPos - 3, pageWidth + 6, 8, 'F');
+                    
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
-                    doc.text('Auftrag c) Begriffszuordnungen', margin, yPos);
+                    doc.setTextColor(155, 89, 182);
+                    doc.text('📚 Auftrag c) Begriffszuordnungen', margin, yPos);
                     yPos += lineHeight + 3;
+                    
+                    doc.setTextColor(0, 0, 0);
                     
                     doc.setFontSize(11);
                     doc.setFont(undefined, 'normal');
@@ -688,10 +748,17 @@
                     yPos = 20;
                 }
                 
+                // Farbiger Header
+                doc.setFillColor(241, 196, 15); // Gelb/Gold
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 2: Franchise verstehen', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('💰 Schritt 2: Franchise verstehen', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0);
                 
                 // Persönliche Franchise-Berechnung
                 if (answers['health_status'] || answers['savings'] || answers['past_costs']) {
@@ -828,10 +895,17 @@
                     yPos = 20;
                 }
                 
+                // Farbiger Header
+                doc.setFillColor(155, 89, 182); // Lila
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 3: Prämienvergleich', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('📊 Schritt 3: Prämienvergleich', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0);
                 
                 // Persönliche Daten
                 if (answers['wohnort'] || answers['alter'] || answers['chosen_franchise']) {
@@ -1015,10 +1089,17 @@
                     yPos = 20;
                 }
                 
+                // Farbiger Header
+                doc.setFillColor(230, 126, 34); // Orange
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 4: Kostenberechnungen', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('🧮 Schritt 4: Kostenberechnungen', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0);
                 
                 // Alexas Fall
                 if (answers['alexa_calculation'] && answers['alexa_calculation'].trim() !== '') {
@@ -1128,10 +1209,17 @@
                     yPos = 20;
                 }
                 
+                // Farbiger Header
+                doc.setFillColor(26, 188, 156); // Türkis/Grün
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 5: Zusatzversicherungen (Hörverstehen)', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('➕ Schritt 5: Zusatzversicherungen (Hörverstehen)', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0);
                 
                 // Drag & Drop Zuordnung - Zeige wo Items platziert wurden
                 const dropGrundItems = [];
@@ -1238,10 +1326,17 @@
                     yPos = 20;
                 }
                 
+                // Farbiger Header
+                doc.setFillColor(231, 76, 60); // Rot
+                doc.rect(margin - 5, yPos - 5, pageWidth + 10, 12, 'F');
+                
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
                 doc.setFont(undefined, 'bold');
-                doc.text('Schritt 6: Yaras Krankenkassen-Beratung', margin, yPos);
-                yPos += lineHeight + 5;
+                doc.text('🎓 Schritt 6: Yaras Krankenkassen-Beratung', margin, yPos + 3);
+                yPos += lineHeight + 10;
+                
+                doc.setTextColor(0, 0, 0);
                 
                 doc.setFontSize(11);
                 doc.setFont(undefined, 'italic');
