@@ -25,24 +25,35 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
 
-    /* Transparentes Hintergrundbild nur im Container */
+    /* Hintergrundbild transparent nur im Container */
     background: 
         linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),
         url('images/KKChBild.webp') no-repeat center;
-    background-size: contain; /* Bild bleibt innerhalb des Containers */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 
-    position: relative; /* damit Text über dem Bild liegt */
-    padding: 20px; /* Platz für Text und Inhalt */
+    position: relative;
+    padding: 20px; /* Platz für Titel und Inhalt */
 }
 
-/* Text über dem Hintergrundbild */
-.container h1,
-.container p {
-    position: relative;
-    z-index: 1;
-    color: #000; /* Text sichtbar machen */
+/* Farbige Fläche hinter dem Titel */
+.title-wrapper {
+    background-color: rgba(255, 255, 255, 0.8); /* hell, leicht transparent */
+    display: inline-block;  /* nur so breit wie der Text */
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.title-wrapper h1 {
+    margin: 0;
+    color: #000; /* Textfarbe */
+}
+
+.title-wrapper p {
+    margin: 5px 0 0 0;
+    color: #333; /* Untertitel-Farbe */
 }
 
         }
