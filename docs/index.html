@@ -1231,6 +1231,233 @@
                 yPos += 10;
             }
             
+            // Schritt 6: Yaras Krankenkassen-Beratung
+            if (answers['yara_franchise'] || answers['yara_cheapest_kasse'] || answers['yara_final_summary']) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 6: Yaras Krankenkassen-Beratung', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'italic');
+                doc.text('Interaktives Beratungs-Spiel: Du hast Yara bei ihrer Krankenkassen-Wahl beraten.', margin, yPos);
+                yPos += lineHeight + 5;
+                
+                // Franchise-Empfehlung
+                if (answers['yara_franchise']) {
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('1. Franchise-Empfehlung:', margin, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    doc.text('Empfohlene Franchise: ' + answers['yara_franchise'] + ' CHF', margin + 5, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    if (answers['yara_franchise_reasoning']) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Begründung:', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        
+                        const reasoningLines = doc.splitTextToSize(answers['yara_franchise_reasoning'], pageWidth - 10);
+                        for (let line of reasoningLines) {
+                            if (yPos > 270) {
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            doc.text(line, margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                    }
+                    yPos += 5;
+                }
+                
+                // Krankenkassen-Empfehlung
+                if (answers['yara_cheapest_kasse']) {
+                    if (yPos > 240) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('2. Krankenkassen-Vergleich:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    doc.text('Günstigste Krankenkasse: ' + answers['yara_cheapest_kasse'], margin + 5, yPos);
+                    yPos += lineHeight;
+                    
+                    if (answers['yara_cheapest_premium']) {
+                        doc.text('Monatliche Prämie: ' + answers['yara_cheapest_premium'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['yara_expensive_kasse']) {
+                        yPos += 3;
+                        doc.text('Teuerste Krankenkasse: ' + answers['yara_expensive_kasse'], margin + 5, yPos);
+                        yPos += lineHeight;
+                        
+                        if (answers['yara_expensive_premium']) {
+                            doc.text('Monatliche Prämie: ' + answers['yara_expensive_premium'] + ' CHF', margin + 5, yPos);
+                            yPos += lineHeight;
+                        }
+                    }
+                    
+                    if (answers['yara_price_difference']) {
+                        yPos += 3;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Preisunterschied pro Monat: ' + answers['yara_price_difference'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight + 3;
+                        doc.setFont(undefined, 'normal');
+                    }
+                    
+                    if (answers['yara_kasse_recommendation']) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Empfehlung:', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        
+                        const kasseLines = doc.splitTextToSize(answers['yara_kasse_recommendation'], pageWidth - 10);
+                        for (let line of kasseLines) {
+                            if (yPos > 270) {
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            doc.text(line, margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                    }
+                    yPos += 5;
+                }
+                
+                // Kostenberechnung 2024
+                if (answers['yara_total_costs'] || answers['yara_total_paid']) {
+                    if (yPos > 230) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('3. Kostenberechnung "Ein schwieriges Jahr":', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    if (answers['yara_total_costs']) {
+                        doc.text('Gesamte Arztrechnungen: ' + answers['yara_total_costs'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['yara_franchise_paid']) {
+                        doc.text('Franchise bezahlt: ' + answers['yara_franchise_paid'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['yara_selbstbehalt']) {
+                        doc.text('Selbstbehalt (10%): ' + answers['yara_selbstbehalt'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                    
+                    if (answers['yara_total_paid']) {
+                        yPos += 3;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Yara bezahlt insgesamt: ' + answers['yara_total_paid'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                    }
+                    
+                    if (answers['yara_kasse_pays']) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Krankenkasse bezahlt: ' + answers['yara_kasse_pays'] + ' CHF', margin + 5, yPos);
+                        yPos += lineHeight + 3;
+                        doc.setFont(undefined, 'normal');
+                    }
+                    yPos += 5;
+                }
+                
+                // Zusatzversicherung
+                if (answers['yara_zusatz']) {
+                    if (yPos > 240) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('4. Zusatzversicherung:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    const zusatzMap = {
+                        'ja': 'Ja, auf jeden Fall empfohlen',
+                        'module': 'Ja, aber nur bestimmte Module',
+                        'nein': 'Nein, nicht nötig'
+                    };
+                    
+                    doc.text('Empfehlung: ' + (zusatzMap[answers['yara_zusatz']] || answers['yara_zusatz']), margin + 5, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    if (answers['yara_zusatz_reasoning']) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Begründung:', margin + 5, yPos);
+                        yPos += lineHeight;
+                        doc.setFont(undefined, 'normal');
+                        
+                        const zusatzLines = doc.splitTextToSize(answers['yara_zusatz_reasoning'], pageWidth - 10);
+                        for (let line of zusatzLines) {
+                            if (yPos > 270) {
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            doc.text(line, margin + 10, yPos);
+                            yPos += lineHeight;
+                        }
+                    }
+                    yPos += 5;
+                }
+                
+                // Gesamtberatung
+                if (answers['yara_final_summary']) {
+                    if (yPos > 200) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('5. Abschließende Gesamtberatung:', margin, yPos);
+                    yPos += lineHeight + 3;
+                    
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    
+                    const summaryLines = doc.splitTextToSize(answers['yara_final_summary'], pageWidth - 5);
+                    for (let line of summaryLines) {
+                        if (yPos > 270) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        doc.text(line, margin + 5, yPos);
+                        yPos += lineHeight;
+                    }
+                }
+                
+                yPos += 10;
+            }
+            
             doc.setFontSize(9);
             doc.setTextColor(128);
             doc.text('Ende des Lernjournals', 105, 285, { align: 'center' });
