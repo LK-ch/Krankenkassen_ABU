@@ -9,11 +9,24 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #7dd3c0;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
         }
-        .container {
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('KBild.webp') center/cover fixed;
+            opacity: 0.15;
+            z-index: -1;
+        }
             max-width: 900px;
             margin: 0 auto;
             background: white;
@@ -22,7 +35,7 @@
             overflow: hidden;
         }
         header {
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            background: linear-gradient(135deg, rgba(125, 211, 192, 0.95) 0%, rgba(77, 184, 168, 0.95) 100%), url('KBild.webp') center/cover fixed;
             color: white;
             padding: 25px 40px;
             position: relative;
@@ -56,10 +69,10 @@
             padding: 25px;
             border-radius: 10px;
             margin-bottom: 25px;
-            border-left: 4px solid #d4a373;
+            border-left: 4px solid #4db8a8;
         }
         .task h2 {
-            color: #a67c52;
+            color: #2d8b7c;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
@@ -83,7 +96,7 @@
         }
         textarea:focus, input:focus, select:focus {
             outline: none;
-            border-color: #d4a373;
+            border-color: #4db8a8;
         }
         textarea {
             min-height: 120px;
@@ -100,7 +113,7 @@
             margin: 10px 5px 10px 0;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #d4a373 0%, #a67c52 100%);
+            background: linear-gradient(135deg, rgba(125, 211, 192, 0.95) 0%, rgba(77, 184, 168, 0.95) 100%), url('KBild.webp') center/cover fixed;
             color: white;
         }
         .btn-primary:hover {
@@ -125,7 +138,7 @@
             border-bottom: 1px solid #dee2e6;
         }
         th {
-            background: #d4a373;
+            background: #4db8a8;
             color: white;
             font-weight: 600;
         }
@@ -139,13 +152,13 @@
             transition: all 0.3s;
         }
         .quiz-option:hover {
-            border-color: #d4a373;
+            border-color: #4db8a8;
             background: #f8f9fa;
         }
         .quiz-option.selected {
-            background: #d4a373;
+            background: #4db8a8;
             color: white;
-            border-color: #d4a373;
+            border-color: #4db8a8;
         }
         @media (max-width: 768px) {
             main { padding: 20px; }
@@ -168,7 +181,7 @@
             </div>
 
             <div class="task">
-                <h2>Auftrag d) 🤔 Welche Franchise passt zu Ihnen?</h2>
+                <h2>🤔 Welche Franchise passt zu Ihnen?</h2>
                 <p>Um die richtige Franchise zu wählen, müssen Sie drei wichtige Fragen beantworten:</p>
                 
                 <div style="margin:20px 0;">
@@ -369,7 +382,7 @@
             if (allCorrect) {
                 overallFeedback.innerHTML = '<div style="background:#d4edda; padding:20px; border-radius:8px; border:2px solid #28a745; color:#155724; font-weight:bold; text-align:center;">🎉 Hervorragend! Sie haben alle Fälle richtig eingeschätzt!</div>';
             } else {
-                overallFeedback.innerHTML = '<div style="background:#fff3cd; padding:15px; border-radius:8px; border:2px solid #ffc107; color:#856404;">💡 Überlegen Sie nochmal: Gesundheitszustand + finanzielle Ressourcen = richtige Franchise-Wahl</div>';
+                overallFeedback.innerHTML = '<div style="background:#ecf0f1; padding:15px; border-radius:8px; border:2px solid #e74c3c; color:#856404;">💡 Überlegen Sie nochmal: Gesundheitszustand + finanzielle Ressourcen = richtige Franchise-Wahl</div>';
             }
         }
         
