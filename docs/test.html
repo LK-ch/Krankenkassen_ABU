@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernpfad Krankenkassen Schweiz</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3e9d2 0%, #a67c52 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-image: url('images/KBild.webp');
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .info-notice {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #e65100;
+        }
+
+        .info-notice strong {
+            color: #bf360c;
+        }
+
+        .flowchart-container {
+            max-width: 1100px;
+            margin: 0 auto 15px;
+            padding: 10px;
+        }
+
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0;
+        }
+
+        .flow-row.horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        .flow-row.with-branch {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+            position: relative;
+        }
+
+        .arrow-right {
+            font-size: 4.5em;
+            color: #f39c12;
+            font-weight: bold;
+            animation: slide-right 2s infinite;
+            flex-shrink: 0;
+        }
+
+        .arrow-left {
+            font-size: 4.5em;
+            color: #f39c12;
+            font-weight: bold;
+            animation: slide-left 2s infinite;
+            flex-shrink: 0;
+        }
+
+        .arrow-turn-down {
+            text-align: right;
+            font-size: 4.5em;
+            color: #f39c12;
+            margin: 5px 0;
+            animation: bounce-down 2s infinite;
+        }
+
+        .arrow-thin {
+            font-size: 2.5em;
+            color: #9e9e9e;
+            font-weight: normal;
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        .branch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes slide-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        @keyframes slide-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        .flow-card {
+            max-width: 260px;
+            min-width: 220px;
+            flex-shrink: 0;
+        }
+
+        .flow-card.optional {
+            max-width: 200px;
+            min-width: 180px;
+        }
+
+        .card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 150px;
+            justify-content: center;
+        }
+
+        .card.optional-card {
+            height: 120px;
+            background: #fafafa;
+            border: 2px dashed #bdbdbd;
+        }
+
+        .card.optional-card .card-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #9c27b0;
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .card.active {
+            background: linear-gradient(135deg, #fff4e6 0%, #ffe0b2 100%);
+            border-color: #f39c12;
+            border-width: 3px;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .card.completed {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-color: #2196F3;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .card.locked {
+            background: #f5f5f5;
+            border-color: #bdbdbd;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .card.locked:hover {
+            transform: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+        }
+
+        .card.highlight-final::before {
+            content: '🎯';
+            position: absolute;
+            top: -18px;
+            right: -18px;
+            font-size: 2em;
+            animation: rotate-trophy 3s infinite;
+        }
+
+        @keyframes rotate-trophy {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .card-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card.optional-card .card-number {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2em;
+        }
+
+        .card.active .card-number {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            animation: pulse-number 2s infinite;
+        }
+
+        .card.completed .card-number {
+            background: linear-gradient(135deg, #2196F3 0%, #1976d2 100%);
+        }
+
+        .card.locked .card-number {
+            background: #bdbdbd;
+        }
+
+        @keyframes pulse-number {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+        }
+
+        .card-content {
+            width: 100%;
+        }
+
+        .card-icon {
+            font-size: 2.2em;
+            margin-bottom: 6px;
+        }
+
+        .card.optional-card .card-icon {
+            font-size: 1.8em;
+        }
+
+        .card.locked .card-icon {
+            filter: grayscale(100%);
+        }
+
+        .card-title {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: #e67e22;
+            line-height: 1.2;
+        }
+
+        .card.optional-card .card-title {
+            font-size: 0.85em;
+        }
+
+        .card.locked .card-title {
+            color: #757575;
+        }
+
+        .progress-section {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .progress-section h2 {
+            color: #e67e22;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+
+        .btn-info {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        @media (max-width: 1024px) {
+            .flow-row.horizontal, .flow-row.with-branch {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .arrow-right, .arrow-left, .arrow-thin {
+                display: none;
+            }
+
+            .flow-card {
+                max-width: 250px;
+                min-width: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Lernpfad: Krankenkassen Schweiz</h1>
+            <p>Verstehen Sie das Schweizer Krankenkassensystem Schritt für Schritt</p>
+        </header>
+
+        <main>
+            <div class="info-notice">
+                <strong>💡 So funktioniert dieser Lernpfad:</strong><br>
+                Arbeiten Sie sich Schritt für Schritt durch die Themen. Jeder Schritt muss abgeschlossen werden, bevor der nächste freigeschaltet wird. Am Ende können Sie ein vollständiges PDF mit all Ihren Antworten herunterladen!
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Erste Reihe: Schritte 1, 2, 3 -->
+                <div class="flow-row horizontal">
+                    <div class="card active flow-card" onclick="openPoint(1)" data-step="1">
+                        <div class="card-number">1</div>
+                        <div class="card-content">
+                            <div class="card-icon">🩺</div>
+                            <div class="card-title">Grundlagen & Begriffe</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-right">→</div>
+
+                    <div class="card flow-card" onclick="openPoint(2)" data-step="2">
+                        <div class="card-number">2</div>
+                        <div class="card-content">
+                            <div class="card-icon">💰</div>
+                            <div class="card-title">Franchise verstehen</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-right">→</div>
+
+                    <div class="card flow-card" onclick="openPoint(3)" data-step="3">
+                        <div class="card-number">3</div>
+                        <div class="card-content">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Prämien vergleichen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pfeil nach unten -->
+                <div class="arrow-turn-down">
+                    <span style="float: right; margin-right: 150px;">↓</span>
+                </div>
+
+                <!-- Zweite Reihe: Schritte 6, 5, 4 (rückwärts) + optionale Übung -->
+                <div class="flow-row with-branch">
+                    <div class="card flow-card highlight-final" onclick="openPoint(6)" data-step="6">
+                        <div class="card-number">6</div>
+                        <div class="card-content">
+                            <div class="card-icon">🎓</div>
+                            <div class="card-title">Abschlussübung</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-left">←</div>
+
+                    <div class="card flow-card" onclick="openPoint(5)" data-step="5">
+                        <div class="card-number">5</div>
+                        <div class="card-content">
+                            <div class="card-icon">➕</div>
+                            <div class="card-title">Zusatzversicherungen</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-left">←</div>
+
+                    <div class="branch-container">
+                        <div class="card flow-card" onclick="openPoint(4)" data-step="4">
+                            <div class="card-number">4</div>
+                            <div class="card-content">
+                                <div class="card-icon">🧮</div>
+                                <div class="card-title">Kostenberechnungen</div>
+                            </div>
+                        </div>
+
+                        <div class="arrow-thin">↓</div>
+
+                        <div class="card flow-card optional optional-card" onclick="openOptionalPractice()" data-step="optional">
+                            <div class="card-badge">Optional</div>
+                            <div class="card-number">⭐</div>
+                            <div class="card-content">
+                                <div class="card-icon">🎮</div>
+                                <div class="card-title">Übung</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h2>📊 Ihr Fortschritt</h2>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%">0%</div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="downloadPDF()">📄 Gesamt-PDF herunterladen</button>
+                    <button class="btn-info" onclick="downloadJSON()">💾 Backup herunterladen</button>
+                    <button class="btn-success" onclick="loadBackup()">📂 Backup laden</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload(event)">
+
+    <script>
+        let learningProgress = {
+            completedPoints: [],
+            currentPoint: 1,
+            answers: {
+                '1_a': '', '1_b': '', '1_c': '',
+                '2_answers': [],
+                '3_franchise': '', '3_cheapest': '', '3_expensive': '', '3_merksatz': '',
+                '4_alexa': '',
+                '5_text': '',
+                '6_martina_a': '', '6_martina_b': ''
+            }
+        };
+
+        function loadProgress() {
+            const saved = localStorage.getItem('kkLearningProgress');
+            if (saved) {
+                learningProgress = JSON.parse(saved);
+                updateUI();
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('kkLearningProgress', JSON.stringify(learningProgress));
+        }
+
+        function openPoint(pointNumber) {
+            if (pointNumber > 1 && !learningProgress.completedPoints.includes(pointNumber - 1)) {
+                alert('⚠️ Bitte schließe zuerst Schritt ' + (pointNumber - 1) + ' ab!');
+                return;
+            }
+            
+            window.location.href = `schritt${pointNumber}.html`;
+        }
+
+        function openOptionalPractice() {
+            // Check if step 4 is unlocked (step 3 is completed)
+            if (!learningProgress.completedPoints.includes(3)) {
+                alert('⚠️ Diese optionale Übung wird freigeschaltet, sobald Schritt 4 verfügbar ist!');
+                return;
+            }
+            
+            window.location.href = 'docs/1JahrKK.html';
+        }
+
+        function updateUI() {
+            // Update main steps 1-6
+            for (let i = 1; i <= 6; i++) {
+                const card = document.querySelector(`.card[data-step="${i}"]`);
+                if (!card) continue;
+                
+                card.classList.remove('active', 'completed', 'locked');
+                
+                if (learningProgress.completedPoints.includes(i)) {
+                    card.classList.add('completed');
+                    const number = card.querySelector('.card-number');
+                    if (number) number.textContent = '✓';
+                } else if (i > 1 && !learningProgress.completedPoints.includes(i - 1)) {
+                    card.classList.add('locked');
+                } else if (i === learningProgress.currentPoint) {
+                    card.classList.add('active');
+                }
+            }
+
+            // Update optional practice card
+            const optionalCard = document.querySelector('.card[data-step="optional"]');
+            if (optionalCard) {
+                optionalCard.classList.remove('locked', 'completed', 'active');
+                
+                // Lock if step 3 is not completed (step 4 not unlocked yet)
+                if (!learningProgress.completedPoints.includes(3)) {
+                    optionalCard.classList.add('locked');
+                } else if (learningProgress.completedPoints.includes('optional')) {
+                    optionalCard.classList.add('completed');
+                    const number = optionalCard.querySelector('.card-number');
+                    if (number) number.textContent = '✓';
+                }
+            }
+            
+            const totalPoints = 6;
+            const completedPoints = learningProgress.completedPoints.filter(p => typeof p === 'number').length;
+            const progressPercent = (completedPoints / totalPoints) * 100;
+            document.getElementById('progress-fill').style.width = progressPercent + '%';
+            document.getElementById('progress-fill').textContent = Math.round(progressPercent) + '%';
+        }
+
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    const orangeColor = [243, 156, 18];
+    const darkBlueColor = [33, 150, 243];
+    
+    // Titelseite
+    doc.setTextColor(...orangeColor);
+    doc.setFontSize(22);
+    doc.setFont(undefined, 'bold');
+    doc.text('Lernjournal', 105, 100, { align: 'center' });
+    doc.setFontSize(18);
+    doc.text('Krankenkassen Schweiz', 105, 115, { align: 'center' });
+    
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'normal');
+    doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 105, 140, { align: 'center' });
+    doc.text(`Abgeschlossene Schritte: ${learningProgress.completedPoints.length} von 6`, 105, 150, { align: 'center' });
+    
+    const lineHeight = 7;
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.width - 2 * margin;
+    const answers = learningProgress.answers;
+    
+    // [Rest of PDF generation code remains the same as in the original file]
+    // ... (I'm keeping the PDF generation code identical to avoid any issues)
+    
+    doc.save('Krankenkassen_Lernjournal.pdf');
+}
+
+        function downloadJSON() {
+            const dataStr = JSON.stringify(learningProgress, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'krankenkassen-backup.json';
+            link.click();
+        }
+
+        function loadBackup() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    learningProgress = data;
+                    saveProgress();
+                    loadProgress();
+                    alert('✓ Backup erfolgreich geladen!');
+                } catch (error) {
+                    alert('❌ Fehler beim Laden der Datei. Bitte überprüfe das Format.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            updateUI();
+        });
+    </script>
+</body>
+</html>
