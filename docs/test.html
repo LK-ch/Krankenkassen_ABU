@@ -67,6 +67,7 @@
             max-width: 1000px;
             margin: 0 auto 15px;
             padding: 10px;
+            position: relative;
         }
 
         .flow-row {
@@ -494,10 +495,8 @@
                     </div>
                 </div>
 
-                <!-- Optionale Übung - rechts daneben mit feinem Pfeil -->
-                <div class="flow-row horizontal" style="margin-top: -152px; justify-content: flex-end; padding-right: 20px;">
-                    <div class="arrow-thin optional-arrow">→</div>
-
+                <!-- Optionale Übung - rechts außen auf gleicher Höhe wie Schritt 3 -->
+                <div class="flow-row horizontal" style="position: absolute; right: 20px; top: 260px;">
                     <div class="card flow-card optional optional-card" onclick="openOptionalPractice()" data-step="optional">
                         <div class="card-badge">Optional</div>
                         <div class="card-number">⭐</div>
