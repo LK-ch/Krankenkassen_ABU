@@ -172,6 +172,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             height: 140px;
             justify-content: center;
+            z-index: 1;
         }
 
         .card.optional-card {
@@ -495,8 +496,8 @@
                     </div>
                 </div>
 
-                <!-- Optionale Übung - rechts außen auf gleicher Höhe wie Schritt 3 -->
-                <div class="flow-row horizontal" style="position: absolute; right: 20px; top: 260px;">
+                <!-- Optionale Übung - rechts außen auf gleicher Höhe wie obere Reihe -->
+                <div class="flow-row horizontal" style="position: absolute; right: 20px; top: 20px;">
                     <div class="card flow-card optional optional-card" onclick="openOptionalPractice()" data-step="optional">
                         <div class="card-badge">Optional</div>
                         <div class="card-number">⭐</div>
@@ -506,6 +507,16 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Dünner Verbindungspfeil von Schritt 4 zur optionalen Übung -->
+                <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#bdbdbd" opacity="0.5"/>
+                        </marker>
+                    </defs>
+                    <path class="connection-line" d="" stroke="#bdbdbd" stroke-width="2" fill="none" opacity="0.5" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+                </svg>
             </div>
 
             <div class="progress-section">
@@ -672,7 +683,37 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadProgress();
             updateUI();
+            drawConnectionLine();
         });
+
+        // Draw connection line from step 4 to optional practice
+        function drawConnectionLine() {
+            const step4Card = document.querySelector('.card[data-step="4"]');
+            const optionalCard = document.querySelector('.card[data-step="optional"]');
+            const svg = document.querySelector('svg');
+            const path = document.querySelector('.connection-line');
+
+            if (step4Card && optionalCard && svg && path) {
+                const step4Rect = step4Card.getBoundingClientRect();
+                const optionalRect = optionalCard.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+
+                // Calculate relative positions
+                const startX = step4Rect.right - svgRect.left;
+                const startY = step4Rect.top + step4Rect.height / 2 - svgRect.top;
+                const endX = optionalRect.left - svgRect.left;
+                const endY = optionalRect.top + optionalRect.height / 2 - svgRect.top;
+
+                // Create a curved path
+                const controlX = (startX + endX) / 2;
+                const pathData = `M ${startX} ${startY} Q ${controlX} ${startY}, ${controlX} ${endY} T ${endX} ${endY}`;
+                
+                path.setAttribute('d', pathData);
+            }
+        }
+
+        // Redraw line on window resize
+        window.addEventListener('resize', drawConnectionLine);
     </script>
 </body>
 </html>
