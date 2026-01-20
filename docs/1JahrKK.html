@@ -450,50 +450,6 @@
                 <p id="month-subtitle">Beginne das Jahr mit Avan</p>
             </div>
 
-            <button class="btn-overview" onclick="toggleOverview()">📊 Jahresübersicht anzeigen</button>
-
-            <div id="yearly-overview" class="yearly-overview hidden">
-                <h3>📊 Jahresübersicht 2024</h3>
-                <table class="overview-table">
-                    <thead>
-                        <tr>
-                            <th>Monat</th>
-                            <th>Ereignis</th>
-                            <th>Arztkosten</th>
-                            <th>Gezahlt (Avan)</th>
-                            <th>Prämie</th>
-                        </tr>
-                    </thead>
-                    <tbody id="overview-tbody">
-                        <!-- Wird dynamisch gefüllt -->
-                    </tbody>
-                </table>
-                
-                <div class="summary-box">
-                    <h4>💰 Gesamtkosten 2024</h4>
-                    <div class="summary-item">
-                        <span>Bezahlte Prämien (12 Monate):</span>
-                        <span id="total-premiums">CHF 0.-</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Gesamte Arztkosten:</span>
-                        <span id="total-medical">CHF 0.-</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Davon Avan bezahlt:</span>
-                        <span id="total-paid">CHF 0.-</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Davon Krankenkasse bezahlt:</span>
-                        <span id="total-insurance">CHF 0.-</span>
-                    </div>
-                    <div class="summary-item">
-                        <span><strong>TOTAL Avan bezahlt (Prämien + Arztkosten):</strong></span>
-                        <span id="total-avan"><strong>CHF 0.-</strong></span>
-                    </div>
-                </div>
-            </div>
-
             <div id="event-container">
                 <!-- Events werden hier dynamisch eingefügt -->
             </div>
@@ -627,6 +583,9 @@
         const monthEvents = [
             { // Januar
                 name: "Januar",
+                seasonColor: "#4A90E2",
+                seasonGradient: "linear-gradient(135deg, #667eea 0%, #4A90E2 100%)",
+                emoji: "❄️",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -634,6 +593,9 @@
             },
             { // Februar
                 name: "Februar",
+                seasonColor: "#B8E0F6",
+                seasonGradient: "linear-gradient(135deg, #E3F2FD 0%, #B8E0F6 100%)",
+                emoji: "⛄",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -651,6 +613,9 @@
             },
             { // März
                 name: "März",
+                seasonColor: "#A8E6CF",
+                seasonGradient: "linear-gradient(135deg, #C8E6C9 0%, #A8E6CF 100%)",
+                emoji: "🌱",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -658,6 +623,9 @@
             },
             { // April
                 name: "April",
+                seasonColor: "#FFE5B4",
+                seasonGradient: "linear-gradient(135deg, #FFF9C4 0%, #FFE5B4 100%)",
+                emoji: "🌷",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -678,6 +646,9 @@
             },
             { // Mai
                 name: "Mai",
+                seasonColor: "#FFB6C1",
+                seasonGradient: "linear-gradient(135deg, #F8BBD0 0%, #FFB6C1 100%)",
+                emoji: "🌸",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -695,6 +666,9 @@
             },
             { // Juni
                 name: "Juni",
+                seasonColor: "#FFD700",
+                seasonGradient: "linear-gradient(135deg, #FFF59D 0%, #FFD700 100%)",
+                emoji: "☀️",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -702,6 +676,9 @@
             },
             { // Juli
                 name: "Juli",
+                seasonColor: "#FF6347",
+                seasonGradient: "linear-gradient(135deg, #FFAB91 0%, #FF6347 100%)",
+                emoji: "🌞",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -720,6 +697,9 @@
             },
             { // August
                 name: "August",
+                seasonColor: "#FFA500",
+                seasonGradient: "linear-gradient(135deg, #FFE082 0%, #FFA500 100%)",
+                emoji: "🏖️",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -739,6 +719,9 @@
             },
             { // September
                 name: "September",
+                seasonColor: "#D2691E",
+                seasonGradient: "linear-gradient(135deg, #FFCC80 0%, #D2691E 100%)",
+                emoji: "🍂",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -746,6 +729,9 @@
             },
             { // Oktober
                 name: "Oktober",
+                seasonColor: "#8B4513",
+                seasonGradient: "linear-gradient(135deg, #BCAAA4 0%, #8B4513 100%)",
+                emoji: "🍁",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -753,6 +739,9 @@
             },
             { // November
                 name: "November",
+                seasonColor: "#696969",
+                seasonGradient: "linear-gradient(135deg, #B0BEC5 0%, #696969 100%)",
+                emoji: "🌧️",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" }
                 ],
@@ -760,6 +749,9 @@
             },
             { // Dezember
                 name: "Dezember",
+                seasonColor: "#C41E3A",
+                seasonGradient: "linear-gradient(135deg, #EF9A9A 0%, #C41E3A 100%)",
+                emoji: "🎄",
                 events: [
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
@@ -825,7 +817,19 @@
                     statusText = 'Avan geht es gut';
             }
             
-            // Add Avan avatar to month display
+            // Determine text color based on background brightness
+            // Helle Hintergründe (Februar, März, April, Mai, Juni) bekommen dunkle Schrift
+            const lightMonths = ['Februar', 'März', 'April', 'Mai', 'Juni'];
+            const textColor = lightMonths.includes(month.name) ? '#333' : 'white';
+            
+            // Update month display with seasonal colors
+            const monthDisplay = document.querySelector('.month-display');
+            if (month.seasonGradient) {
+                monthDisplay.style.background = month.seasonGradient;
+                monthDisplay.style.color = textColor;
+            }
+            
+            // Add Avan avatar to month display with emoji
             const monthSubtitle = document.getElementById('month-subtitle');
             monthSubtitle.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 10px;">
@@ -833,6 +837,7 @@
                         ${getAvanAvatar(emotion)}
                     </div>
                     <span>${statusText}</span>
+                    <span style="font-size: 2em;">${month.emoji || ''}</span>
                 </div>
             `;
             
@@ -1142,12 +1147,44 @@
                 `;
             });
             
+            // Erstelle monatliche Übersicht
+            let monthlyRows = '';
+            gameState.monthlyData.forEach(data => {
+                monthlyRows += `
+                    <tr>
+                        <td><strong>${data.month}</strong></td>
+                        <td>${data.event}</td>
+                        <td>${data.medicalCost > 0 ? 'CHF ' + data.medicalCost.toFixed(2) : '-'}</td>
+                        <td>${data.patientPaid > 0 ? 'CHF ' + data.patientPaid.toFixed(2) : '-'}</td>
+                        <td>CHF ${data.premium}.-</td>
+                    </tr>
+                `;
+            });
+            
             container.innerHTML = `
                 <div style="font-size: 100px; text-align: center;">🎉</div>
                 <div class="yearly-overview">
                     <h3 style="text-align: center; color: #f39c12; font-size: 2em;">
                         🎊 Gratulation! Du hast das Jahr 2024 abgeschlossen!
                     </h3>
+                    
+                    <div style="background: white; border: 3px solid #f39c12; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                        <h3 style="color: #f39c12; margin-bottom: 20px; font-size: 1.5em;">📊 Monatliche Übersicht 2024</h3>
+                        <table class="overview-table">
+                            <thead>
+                                <tr>
+                                    <th>Monat</th>
+                                    <th>Ereignis</th>
+                                    <th>Arztkosten</th>
+                                    <th>Gezahlt (Avan)</th>
+                                    <th>Prämie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${monthlyRows}
+                            </tbody>
+                        </table>
+                    </div>
                     
                     <div class="summary-box" style="margin-top: 20px;">
                         <h4>📊 Jahresabschluss 2024 mit deiner Wahl</h4>
@@ -1230,35 +1267,9 @@
             updateOverview();
         }
 
-        function toggleOverview() {
-            const overview = document.getElementById('yearly-overview');
-            overview.classList.toggle('hidden');
-        }
-
         function updateOverview() {
-            const tbody = document.getElementById('overview-tbody');
-            tbody.innerHTML = '';
-            
-            gameState.monthlyData.forEach(data => {
-                const row = `
-                    <tr>
-                        <td><strong>${data.month}</strong></td>
-                        <td>${data.event}</td>
-                        <td>${data.medicalCost > 0 ? 'CHF ' + data.medicalCost.toFixed(2) : '-'}</td>
-                        <td>${data.patientPaid > 0 ? 'CHF ' + data.patientPaid.toFixed(2) : '-'}</td>
-                        <td>CHF ${data.premium}.-</td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
-            
-            // Update summary totals
-            const totalAvanPaid = gameState.totalPremiumsPaid + gameState.totalPatientPaid;
-            document.getElementById('total-premiums').textContent = `CHF ${gameState.totalPremiumsPaid}.-`;
-            document.getElementById('total-medical').textContent = `CHF ${gameState.totalMedicalCosts.toFixed(2)}`;
-            document.getElementById('total-paid').textContent = `CHF ${gameState.totalPatientPaid.toFixed(2)}`;
-            document.getElementById('total-insurance').textContent = `CHF ${gameState.totalInsurancePaid.toFixed(2)}`;
-            document.getElementById('total-avan').textContent = `CHF ${totalAvanPaid.toFixed(2)}`;
+            // Diese Funktion wird nicht mehr während des Spiels benötigt
+            // Die Übersicht wird nur am Ende in showFinalSummary angezeigt
         }
     </script>
 </body>
