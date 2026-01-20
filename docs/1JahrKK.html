@@ -414,7 +414,7 @@
             <div class="avan-message">
                 <h3>Hallo! Ich bin Avan 👋</h3>
                 <p>Ich bin 20 Jahre alt und arbeite als Bäcker in Bern. Meine Arbeit ist anstrengend – ich stehe oft schon ab 1 Uhr morgens in der Backstube und bin den ganzen Tag auf den Beinen. Am Feierabend bin ich meistens ziemlich müde, deshalb mache ich auch nicht so viel Sport.</p>
-                <p>Gesundheitlich geht's mir eigentlich gut. Ich gehe normalerweise nur 1-2 Mal im Jahr zum Arzt, wenn ich mal krank bin. Meine Krankenkasse kostet mich momentan CHF 400.- pro Monat, und ich muss mich jetzt für eine Franchise entscheiden.</p>
+                <p>Gesundheitlich geht's mir eigentlich gut. Ich gehe normalerweise nur 1-2 Mal im Jahr zum Arzt, wenn ich mal krank bin. Meine Krankenkasse kostet mich momentan CHF 390.- pro Monat, und ich muss mich jetzt für eine Franchise entscheiden.</p>
                 <p><strong>Aber ehrlich gesagt...</strong> ich verstehe das alles noch nicht so gut mit Franchise, Selbstbehalt und so weiter. 😅 Kannst du mir helfen, das durchzuspielen?</p>
             </div>
         </div>
@@ -426,17 +426,17 @@
             <p style="margin-top: 10px;"><strong>💡 Wichtig:</strong> Je höher die Franchise, desto niedriger die monatliche Prämie!</p>
             
             <div class="franchise-options">
-                <div class="franchise-card" onclick="selectFranchise(300, 400)">
+                <div class="franchise-card" onclick="selectFranchise(300, 390)">
                     <h3>CHF 300.-</h3>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 400.-/Monat</p>
+                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 390.-/Monat</p>
                 </div>
-                <div class="franchise-card" onclick="selectFranchise(1000, 350)">
+                <div class="franchise-card" onclick="selectFranchise(1000, 340)">
                     <h3>CHF 1000.-</h3>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 350.-/Monat</p>
+                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 340.-/Monat</p>
                 </div>
-                <div class="franchise-card" onclick="selectFranchise(2500, 300)">
+                <div class="franchise-card" onclick="selectFranchise(2500, 290)">
                     <h3>CHF 2500.-</h3>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 300.-/Monat</p>
+                    <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Prämie: CHF 290.-/Monat</p>
                 </div>
             </div>
             
@@ -662,15 +662,16 @@
                     { type: "premium", description: "Monatliche Prämie bezahlen" },
                     { 
                         type: "medical", 
-                        description: "Avan hat starke Bauchschmerzen und Übelkeit. Er geht in den Notfall wegen Magenentzündung (Gastritis).",
+                        description: "Avan hat starke Bauchschmerzen und Übelkeit. Er geht in den Notfall wegen Magenentzündung (Gastritis) und muss eine Nacht im Spital bleiben.",
                         diagnosis: "Akute Gastritis (Magenentzündung)",
                         treatments: [
                             { name: "Notfallkonsultation", cost: 185 },
                             { name: "Blutuntersuchung", cost: 145 },
                             { name: "Ultraschall Abdomen", cost: 180 },
+                            { name: "Spitalübernachtung (1 Nacht)", cost: 1200 },
                             { name: "Medikamente (Magenschutz)", cost: 45 }
                         ],
-                        totalCost: 555
+                        totalCost: 1755
                     }
                 ],
                 emotion: "worried"
@@ -1100,9 +1101,9 @@
             // Berechne Kosten für andere Franchisen
             const comparisons = [];
             const franchiseOptions = [
-                { franchise: 300, premium: 400 },
-                { franchise: 1000, premium: 350 },
-                { franchise: 2500, premium: 300 }
+                { franchise: 300, premium: 390 },
+                { franchise: 1000, premium: 340 },
+                { franchise: 2500, premium: 290 }
             ];
             
             franchiseOptions.forEach(option => {
