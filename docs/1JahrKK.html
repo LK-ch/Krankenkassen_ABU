@@ -576,7 +576,8 @@
             totalInsurancePaid: 0,
             monthlyData: [],
             firstMedicalEvent: true,
-            processedMonths: new Set() // Track which months have been processed
+            processedMonths: new Set(), // Track which months have been processed
+            correctAnswers: {} // Store correct answers for each month
         };
 
         // Month Events Data
@@ -869,8 +870,13 @@
             // Add to totals
             gameState.totalPremiumsPaid += gameState.monthlyPremium;
             
-            // Add to monthly data
-            addMonthlyData(monthEvents[gameState.currentMonth].name, "Prämie bezahlt", 0, 0, gameState.monthlyPremium);
+            // Create monthly data entry for this month (will be updated if medical event occurs)
+            const currentMonth = monthEvents[gameState.currentMonth].name;
+            const existingEntry = gameState.monthlyData.find(d => d.month === currentMonth);
+            
+            if (!existingEntry) {
+                addMonthlyData(currentMonth, "Keine Arztbesuche", 0, 0, gameState.monthlyPremium);
+            }
         }
 
         function displayMedicalEvent(container, event) {
@@ -986,19 +992,30 @@
             const selfpayInput = parseFloat(document.getElementById(`selfpay-input-${monthIndex}`).value) || 0;
             const insuranceInput = parseFloat(document.getElementById(`insurance-input-${monthIndex}`).value) || 0;
             
-            // Calculate correct values based on CURRENT state (not including this month yet if not processed)
-            const remainingFranchise = gameState.selectedFranchise - gameState.franchiseUsed;
-            const franchisePart = Math.min(totalCost, remainingFranchise);
-            const afterFranchise = totalCost - franchisePart;
+            // If this month was already processed, use the stored correct answers
+            let franchisePartRounded, selfpayPartRounded, insurancePartRounded;
             
-            const remainingSelfpay = 700 - gameState.selfPaymentUsed;
-            const selfpayPart = Math.min(afterFranchise * 0.1, remainingSelfpay);
-            const insurancePart = afterFranchise - selfpayPart;
-            
-            // Round all values to 2 decimals for comparison
-            const franchisePartRounded = Math.round(franchisePart * 100) / 100;
-            const selfpayPartRounded = Math.round(selfpayPart * 100) / 100;
-            const insurancePartRounded = Math.round(insurancePart * 100) / 100;
+            if (gameState.processedMonths.has(monthIndex)) {
+                // Use stored correct answers
+                const stored = gameState.correctAnswers[monthIndex];
+                franchisePartRounded = stored.franchise;
+                selfpayPartRounded = stored.selfpay;
+                insurancePartRounded = stored.insurance;
+            } else {
+                // Calculate correct values based on CURRENT state (not including this month yet)
+                const remainingFranchise = gameState.selectedFranchise - gameState.franchiseUsed;
+                const franchisePart = Math.min(totalCost, remainingFranchise);
+                const afterFranchise = totalCost - franchisePart;
+                
+                const remainingSelfpay = 700 - gameState.selfPaymentUsed;
+                const selfpayPart = Math.min(afterFranchise * 0.1, remainingSelfpay);
+                const insurancePart = afterFranchise - selfpayPart;
+                
+                // Round all values to 2 decimals for comparison
+                franchisePartRounded = Math.round(franchisePart * 100) / 100;
+                selfpayPartRounded = Math.round(selfpayPart * 100) / 100;
+                insurancePartRounded = Math.round(insurancePart * 100) / 100;
+            }
             
             const franchiseInputRounded = Math.round(franchiseInput * 100) / 100;
             const selfpayInputRounded = Math.round(selfpayInput * 100) / 100;
@@ -1034,12 +1051,19 @@
                 
                 // Check if this month was already processed (to prevent double-counting)
                 if (!gameState.processedMonths.has(monthIndex)) {
+                    // Store the correct answers for this month
+                    gameState.correctAnswers[monthIndex] = {
+                        franchise: franchisePartRounded,
+                        selfpay: selfpayPartRounded,
+                        insurance: insurancePartRounded
+                    };
+                    
                     // Only update game state if this is the first correct answer for this month
-                    gameState.franchiseUsed += franchisePart;
-                    gameState.selfPaymentUsed += selfpayPart;
+                    gameState.franchiseUsed += franchisePartRounded;
+                    gameState.selfPaymentUsed += selfpayPartRounded;
                     gameState.totalMedicalCosts += totalCost;
-                    gameState.totalPatientPaid += franchisePart + selfpayPart;
-                    gameState.totalInsurancePaid += insurancePart;
+                    gameState.totalPatientPaid += franchisePartRounded + selfpayPartRounded;
+                    gameState.totalInsurancePaid += insurancePartRounded;
                     
                     // Mark this month as processed
                     gameState.processedMonths.add(monthIndex);
@@ -1049,7 +1073,7 @@
                         monthEvents[gameState.currentMonth].name, 
                         monthEvents[gameState.currentMonth].events.find(e => e.type === 'medical').diagnosis,
                         totalCost,
-                        franchisePart + selfpayPart,
+                        franchisePartRounded + selfpayPartRounded,
                         gameState.monthlyPremium
                     );
                     
@@ -1071,23 +1095,33 @@
         }
 
         function addMonthlyData(month, event, medicalCost, patientPaid, premium) {
-            gameState.monthlyData.push({
-                month: month,
-                event: event,
-                medicalCost: medicalCost,
-                patientPaid: patientPaid,
-                premium: premium
-            });
+            // Check if entry for this month already exists
+            const existingIndex = gameState.monthlyData.findIndex(d => d.month === month);
+            
+            if (existingIndex >= 0) {
+                // Update existing entry (replace "Keine Arztbesuche" with actual medical event)
+                gameState.monthlyData[existingIndex] = {
+                    month: month,
+                    event: event,
+                    medicalCost: medicalCost,
+                    patientPaid: patientPaid,
+                    premium: premium
+                };
+            } else {
+                // Add new entry
+                gameState.monthlyData.push({
+                    month: month,
+                    event: event,
+                    medicalCost: medicalCost,
+                    patientPaid: patientPaid,
+                    premium: premium
+                });
+            }
         }
 
         function nextMonth() {
-            // If current month has no medical event, add monthly data
-            const currentMonthEvents = monthEvents[gameState.currentMonth].events;
-            const hasMedicalEvent = currentMonthEvents.some(e => e.type === 'medical');
-            
-            if (!hasMedicalEvent) {
-                addMonthlyData(monthEvents[gameState.currentMonth].name, "Keine Arztbesuche", 0, 0, gameState.monthlyPremium);
-            }
+            // Don't add monthly data for months without medical events anymore
+            // Only the premium payment will be tracked, medical events add their own rows
             
             gameState.currentMonth++;
             
