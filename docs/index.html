@@ -613,8 +613,15 @@
                 return;
             }
 
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            // Check if jsPDF is loaded
+            if (typeof window.jspdf === 'undefined') {
+                alert('❌ PDF-Bibliothek konnte nicht geladen werden. Bitte laden Sie die Seite neu.');
+                return;
+            }
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
             
             const orangeColor = [243, 156, 18];
             const darkOrangeColor = [230, 126, 34];
@@ -849,7 +856,19 @@
                 doc.text(`Seite ${i} von ${pageCount}`, pageWidth / 2, 285, { align: 'center' });
             }
 
-            doc.save('Krankenkassen_Lernjournal.pdf');
+            // Save the PDF
+            try {
+                doc.save('Krankenkassen_Lernjournal.pdf');
+                console.log('PDF erfolgreich erstellt!');
+            } catch (saveError) {
+                console.error('Fehler beim Speichern:', saveError);
+                alert('❌ Fehler beim Speichern des PDFs. Bitte Browser-Konsole prüfen.');
+            }
+            
+            } catch (error) {
+                console.error('PDF-Fehler:', error);
+                alert('❌ Fehler beim Erstellen des PDFs: ' + error.message);
+            }
         }
 
         function downloadJSON() {
