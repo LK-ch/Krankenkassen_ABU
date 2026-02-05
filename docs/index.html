@@ -619,22 +619,441 @@
             
             const orangeColor = [243, 156, 18];
             const darkBlueColor = [33, 150, 243];
+            const blackColor = [0, 0, 0];
+            const greyColor = [100, 100, 100];
             
-            // Titelseite
+            let yPos = 20;
+            const leftMargin = 20;
+            const rightMargin = 190;
+            const pageHeight = 280;
+            
+            // Helper function to add new page if needed
+            function checkNewPage(neededSpace = 20) {
+                if (yPos + neededSpace > pageHeight) {
+                    doc.addPage();
+                    yPos = 20;
+                    return true;
+                }
+                return false;
+            }
+            
+            // Helper function to add wrapped text
+            function addWrappedText(text, x, y, maxWidth, lineHeight = 7) {
+                const lines = doc.splitTextToSize(text, maxWidth);
+                lines.forEach(line => {
+                    checkNewPage();
+                    doc.text(line, x, y);
+                    y += lineHeight;
+                    yPos = y;
+                });
+                return y;
+            }
+            
+            // ===== TITELSEITE =====
             doc.setTextColor(...orangeColor);
-            doc.setFontSize(22);
+            doc.setFontSize(24);
             doc.setFont(undefined, 'bold');
             doc.text('Lernjournal', 105, 100, { align: 'center' });
-            doc.setFontSize(18);
+            doc.setFontSize(20);
             doc.text('Krankenkassen Schweiz', 105, 115, { align: 'center' });
             
-            doc.setTextColor(0, 0, 0);
+            doc.setTextColor(...blackColor);
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
             doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 105, 140, { align: 'center' });
-            doc.text(`Abgeschlossene Schritte: ${learningProgress.completedPoints.length} von 6`, 105, 150, { align: 'center' });
+            doc.text(`Abgeschlossene Schritte: ${learningProgress.completedPoints.filter(p => typeof p === 'number').length} von 6`, 105, 150, { align: 'center' });
             
-            doc.save('Krankenkassen_Lernjournal.pdf');
+            // ===== SCHRITT 1: GRUNDLAGEN & BEGRIFFE =====
+            doc.addPage();
+            yPos = 20;
+            
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 1: Grundlagen & Begriffe', leftMargin, yPos);
+            yPos += 15;
+            
+            // Erste Gedanken
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Erste Gedanken zur Arztrechnung', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const answer_a = learningProgress.answers.answer_a || '(Keine Antwort)';
+            yPos = addWrappedText(answer_a, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 10;
+            
+            checkNewPage(25);
+            
+            // Woher kommt das Geld
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Woher hat die Krankenkasse das Geld?', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const answer_b = learningProgress.answers.answer_b || '(Keine Antwort)';
+            yPos = addWrappedText(answer_b, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 10;
+            
+            checkNewPage(25);
+            
+            // Begriffszuordnungen
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Begriffszuordnungen', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Definition 1: ${learningProgress.answers.def1 || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Definition 2: ${learningProgress.answers.def2 || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Definition 3: ${learningProgress.answers.def3 || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 15;
+            
+            // ===== SCHRITT 2: FRANCHISE VERSTEHEN =====
+            checkNewPage(50);
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 2: Franchise verstehen', leftMargin, yPos);
+            yPos += 15;
+            
+            // Franchise-Wahl
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Meine Franchise-Wahl', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Gesundheitszustand: ${learningProgress.answers.health_status || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Ersparnisse: ${learningProgress.answers.savings || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Bisherige Gesundheitskosten: ${learningProgress.answers.past_costs || '(nicht ausgefuellt)'} CHF`, leftMargin, yPos);
+            yPos += 12;
+            
+            checkNewPage(25);
+            
+            // Fallbeispiele
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Fallbeispiele - Meine Empfehlungen', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Fall 1 (Anna): ${learningProgress.answers.fall1_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Fall 2 (Herr Meier): ${learningProgress.answers.fall2_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Fall 3 (Sarah): ${learningProgress.answers.fall3_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            // Reflexion
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Meine Reflexion zum Zusammenhang', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const franchise_reasoning = learningProgress.answers.franchise_reasoning || '(Keine Reflexion)';
+            yPos = addWrappedText(franchise_reasoning, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 15;
+            
+            // ===== SCHRITT 3: PRÄMIEN VERGLEICHEN =====
+            checkNewPage(50);
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 3: Praemien vergleichen', leftMargin, yPos);
+            yPos += 15;
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Meine Krankenkassen-Recherche', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Wohnort: ${learningProgress.answers.wohnort || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Alter/Jahrgang: ${learningProgress.answers.alter || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Gewaehlte Franchise: ${learningProgress.answers.chosen_franchise || '(nicht ausgefuellt)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Guenstigste Krankenkasse: ${learningProgress.answers.cheapest_kk || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Teuerste Krankenkasse: ${learningProgress.answers.expensive_kk || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            // Vergleich zwei Wohnorte
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Vergleich zweier Wohnorte', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const ort1 = learningProgress.answers.vergleich_ort1 || '(nicht ausgefuellt)';
+            const ort2 = learningProgress.answers.vergleich_ort2 || '(nicht ausgefuellt)';
+            doc.text(`Wohnort 1: ${ort1}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Wohnort 2: ${ort2}`, leftMargin, yPos);
+            yPos += 6;
+            const beobachtung = learningProgress.answers.vergleich_beobachtung || '(Keine Beobachtung)';
+            doc.text('Meine Beobachtung:', leftMargin, yPos);
+            yPos += 6;
+            yPos = addWrappedText(beobachtung, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(25);
+            
+            // Merksatz
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Mein Merksatz', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const merksatz = learningProgress.answers.merksatz || '(Kein Merksatz)';
+            yPos = addWrappedText(merksatz, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 15;
+            
+            // ===== SCHRITT 4: KOSTENBERECHNUNGEN =====
+            checkNewPage(50);
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 4: Kostenberechnungen', leftMargin, yPos);
+            yPos += 15;
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Alexas Krankenkassenkosten', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const alexa_calc = learningProgress.answers.alexa_calculation || '(Keine Berechnung)';
+            yPos = addWrappedText(alexa_calc, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(25);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Verstaendnisfrage', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const understanding = learningProgress.answers.understanding || '(Keine Antwort)';
+            yPos = addWrappedText(understanding, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(25);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Ahmeds Krankenkassenkosten', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const ahmed_calc = learningProgress.answers.ahmed_calculation || '(Keine Berechnung)';
+            yPos = addWrappedText(ahmed_calc, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 15;
+            
+            // ===== SCHRITT 5: ZUSATZVERSICHERUNGEN =====
+            checkNewPage(50);
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 5: Zusatzversicherungen', leftMargin, yPos);
+            yPos += 15;
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Hoerverstehen-Aufgaben', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Aufgabe 1: ${learningProgress.answers.aufg1_frage || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Aufgabe 2b (Kosten): ${learningProgress.answers.aufgabe2b_kosten || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Aufgabe 3: ${learningProgress.answers.aufg3_vogel || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Aufgabe 6: ${learningProgress.answers.aufg6_einig || '(nicht beantwortet)'}`, leftMargin, yPos);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Meine persoenliche Meinung', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const aufgabe7 = learningProgress.answers.aufgabe7 || '(Keine Meinung)';
+            yPos = addWrappedText(aufgabe7, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 15;
+            
+            // ===== SCHRITT 6: YARAS BERATUNG =====
+            checkNewPage(50);
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Schritt 6: Yaras Krankenkassen-Beratung', leftMargin, yPos);
+            yPos += 15;
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Franchise-Empfehlung fuer Yara', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Empfohlene Franchise: ${learningProgress.answers.yara_franchise || '(nicht gewaehlt)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            const yara_franchise_reasoning = learningProgress.answers.yara_franchise_reasoning || '(Keine Begruendung)';
+            yPos = addWrappedText(yara_franchise_reasoning, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Krankenkassen-Empfehlung', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Guenstigste: ${learningProgress.answers.yara_cheapest_kasse || '(nicht recherchiert)'}`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Praemie: ${learningProgress.answers.yara_cheapest_premium || '(nicht recherchiert)'} CHF/Monat`, leftMargin, yPos);
+            yPos += 6;
+            const yara_kasse_rec = learningProgress.answers.yara_kasse_recommendation || '(Keine Empfehlung)';
+            yPos = addWrappedText(yara_kasse_rec, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Kostenberechnung fuer Yara', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Gesamtkosten: ${learningProgress.answers.yara_total_costs || '(nicht berechnet)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Yara bezahlt: ${learningProgress.answers.yara_total_paid || '(nicht berechnet)'} CHF`, leftMargin, yPos);
+            yPos += 6;
+            doc.text(`Krankenkasse bezahlt: ${learningProgress.answers.yara_kasse_pays || '(nicht berechnet)'} CHF`, leftMargin, yPos);
+            yPos += 12;
+            
+            checkNewPage(30);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Zusatzversicherung fuer Yara', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Empfehlung: ${learningProgress.answers.yara_zusatz || '(nicht gewaehlt)'}`, leftMargin, yPos);
+            yPos += 6;
+            const yara_zusatz_reasoning = learningProgress.answers.yara_zusatz_reasoning || '(Keine Begruendung)';
+            yPos = addWrappedText(yara_zusatz_reasoning, leftMargin, yPos, rightMargin - leftMargin);
+            yPos += 12;
+            
+            checkNewPage(35);
+            
+            doc.setTextColor(...darkBlueColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Abschliessende Gesamtberatung', leftMargin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const final_summary = learningProgress.answers.yara_final_summary || '(Keine Zusammenfassung)';
+            yPos = addWrappedText(final_summary, leftMargin, yPos, rightMargin - leftMargin);
+            
+            // ===== ABSCHLUSSSEITE =====
+            doc.addPage();
+            yPos = 100;
+            doc.setTextColor(...orangeColor);
+            doc.setFontSize(20);
+            doc.setFont(undefined, 'bold');
+            doc.text('Lernpfad abgeschlossen!', 105, yPos, { align: 'center' });
+            yPos += 15;
+            
+            doc.setTextColor(...blackColor);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'normal');
+            const completedSteps = learningProgress.completedPoints.filter(p => typeof p === 'number').length;
+            doc.text(`Sie haben ${completedSteps} von 6 Schritten erfolgreich abgeschlossen.`, 105, yPos, { align: 'center' });
+            yPos += 10;
+            doc.setTextColor(...greyColor);
+            doc.setFontSize(10);
+            doc.text('Erstellt am: ' + new Date().toLocaleString('de-DE'), 105, yPos, { align: 'center' });
+            
+            // Save PDF
+            doc.save('Krankenkassen_Lernjournal_Komplett.pdf');
         }
 
         function downloadJSON() {
