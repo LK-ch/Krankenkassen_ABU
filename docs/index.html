@@ -22,7 +22,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-image: url('images/KBild.webp');
+            background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -115,20 +115,6 @@
             color: #f39c12;
             margin: 5px 0;
             animation: bounce-down 2s infinite;
-        }
-
-        .arrow-thin {
-            font-size: 2em;
-            color: #9e9e9e;
-            font-weight: normal;
-            flex-shrink: 0;
-            opacity: 0.7;
-        }
-
-        .arrow-thin.optional-arrow {
-            font-size: 1.8em;
-            opacity: 0.5;
-            color: #bdbdbd;
         }
 
         @keyframes slide-right {
@@ -369,6 +355,12 @@
             transform: scale(1.05);
         }
 
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
@@ -390,7 +382,7 @@
                 gap: 10px;
             }
 
-            .arrow-right, .arrow-left, .arrow-thin {
+            .arrow-right, .arrow-left {
                 display: none;
             }
 
@@ -429,7 +421,6 @@
             </div>
 
             <div class="flowchart-container">
-                <!-- Erste Reihe: Schritte 1, 2, 3 -->
                 <div class="flow-row horizontal">
                     <div class="card active flow-card" onclick="openPoint(1)" data-step="1">
                         <div class="card-number">1</div>
@@ -460,12 +451,10 @@
                     </div>
                 </div>
 
-                <!-- Pfeil nach unten von Schritt 3 zu Schritt 4 -->
                 <div class="arrow-turn-down">
                     <span style="float: right; margin-right: 20px;">↓</span>
                 </div>
 
-                <!-- Zweite Reihe: Schritte 6, 5, 4 (rückwärts) -->
                 <div class="flow-row with-branch">
                     <div class="card flow-card highlight-final" onclick="openPoint(6)" data-step="6">
                         <div class="card-number">6</div>
@@ -496,7 +485,6 @@
                     </div>
                 </div>
 
-                <!-- Optionale Übung - rechts außen, zwischen oberer und unterer Reihe -->
                 <div class="flow-row horizontal" style="position: absolute; right: 20px; top: 140px;">
                     <div class="card flow-card optional optional-card" onclick="openOptionalPractice()" data-step="optional">
                         <div class="card-badge">Optional</div>
@@ -517,7 +505,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button class="btn-primary" onclick="downloadPDF()">📄 Gesamt-PDF herunterladen</button>
+                    <button class="btn-primary" id="pdf-btn" onclick="downloadPDF()">📄 Gesamt-PDF herunterladen</button>
                     <button class="btn-info" onclick="downloadJSON()">💾 Backup herunterladen</button>
                     <button class="btn-success" onclick="loadBackup()">📂 Backup laden</button>
                 </div>
@@ -563,7 +551,6 @@
         }
 
         function openOptionalPractice() {
-            // Check if step 4 is unlocked (step 3 is completed)
             if (!learningProgress.completedPoints.includes(3)) {
                 alert('⚠️ Diese optionale Übung wird freigeschaltet, sobald Schritt 4 verfügbar ist!');
                 return;
@@ -573,7 +560,6 @@
         }
 
         function updateUI() {
-            // Update main steps 1-6
             for (let i = 1; i <= 6; i++) {
                 const card = document.querySelector(`.card[data-step="${i}"]`);
                 if (!card) continue;
@@ -591,12 +577,10 @@
                 }
             }
 
-            // Update optional practice card
             const optionalCard = document.querySelector('.card[data-step="optional"]');
             if (optionalCard) {
                 optionalCard.classList.remove('locked', 'completed', 'active');
                 
-                // Lock if step 3 is not completed (step 4 not unlocked yet)
                 if (!learningProgress.completedPoints.includes(3)) {
                     optionalCard.classList.add('locked');
                 } else if (learningProgress.completedPoints.includes('optional')) {
@@ -611,29 +595,260 @@
             const progressPercent = (completedPoints / totalPoints) * 100;
             document.getElementById('progress-fill').style.width = progressPercent + '%';
             document.getElementById('progress-fill').textContent = Math.round(progressPercent) + '%';
+
+            // Enable/disable PDF button
+            const pdfBtn = document.getElementById('pdf-btn');
+            if (completedPoints === 0) {
+                pdfBtn.disabled = true;
+                pdfBtn.title = 'Schließen Sie mindestens einen Schritt ab, um das PDF zu erstellen';
+            } else {
+                pdfBtn.disabled = false;
+                pdfBtn.title = '';
+            }
         }
 
         async function downloadPDF() {
+            if (learningProgress.completedPoints.filter(p => typeof p === 'number').length === 0) {
+                alert('❌ Bitte schließen Sie mindestens einen Schritt ab, bevor Sie das PDF herunterladen.');
+                return;
+            }
+
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
             const orangeColor = [243, 156, 18];
-            const darkBlueColor = [33, 150, 243];
+            const darkOrangeColor = [230, 126, 34];
+            const blueColor = [33, 150, 243];
+            const grayColor = [117, 117, 117];
             
+            let yPos = 20;
+            const leftMargin = 20;
+            const pageWidth = 210;
+            const maxWidth = 170;
+
+            // Helper function to add text with word wrapping
+            function addWrappedText(text, y, maxW, fontSize = 11, color = [0, 0, 0]) {
+                doc.setFontSize(fontSize);
+                doc.setTextColor(...color);
+                const lines = doc.splitTextToSize(text, maxW);
+                doc.text(lines, leftMargin, y);
+                return y + (lines.length * fontSize * 0.5);
+            }
+
             // Titelseite
             doc.setTextColor(...orangeColor);
-            doc.setFontSize(22);
+            doc.setFontSize(24);
             doc.setFont(undefined, 'bold');
-            doc.text('Lernjournal', 105, 100, { align: 'center' });
-            doc.setFontSize(18);
-            doc.text('Krankenkassen Schweiz', 105, 115, { align: 'center' });
+            doc.text('Lernjournal', pageWidth / 2, 80, { align: 'center' });
+            
+            doc.setFontSize(20);
+            doc.text('Krankenkassen Schweiz', pageWidth / 2, 100, { align: 'center' });
             
             doc.setTextColor(0, 0, 0);
-            doc.setFontSize(11);
+            doc.setFontSize(12);
             doc.setFont(undefined, 'normal');
-            doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 105, 140, { align: 'center' });
-            doc.text(`Abgeschlossene Schritte: ${learningProgress.completedPoints.length} von 6`, 105, 150, { align: 'center' });
+            doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), pageWidth / 2, 130, { align: 'center' });
             
+            const completedCount = learningProgress.completedPoints.filter(p => typeof p === 'number').length;
+            doc.text(`Abgeschlossene Schritte: ${completedCount} von 6`, pageWidth / 2, 145, { align: 'center' });
+            
+            // Neue Seite für Inhalt
+            doc.addPage();
+            yPos = 20;
+
+            // Schritt 1
+            if (learningProgress.completedPoints.includes(1)) {
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 1: Grundlagen & Begriffe', leftMargin, yPos);
+                yPos += 10;
+
+                doc.setTextColor(...blueColor);
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text('a) Obligatorische Grundversicherung (OKP)', leftMargin, yPos);
+                yPos += 6;
+                if (learningProgress.answers['1_a']) {
+                    yPos = addWrappedText(learningProgress.answers['1_a'], yPos, maxWidth, 10);
+                }
+                yPos += 8;
+
+                doc.setTextColor(...blueColor);
+                doc.text('b) Zusatzversicherung (VVG)', leftMargin, yPos);
+                yPos += 6;
+                if (learningProgress.answers['1_b']) {
+                    yPos = addWrappedText(learningProgress.answers['1_b'], yPos, maxWidth, 10);
+                }
+                yPos += 8;
+
+                doc.setTextColor(...blueColor);
+                doc.text('c) Franchise', leftMargin, yPos);
+                yPos += 6;
+                if (learningProgress.answers['1_c']) {
+                    yPos = addWrappedText(learningProgress.answers['1_c'], yPos, maxWidth, 10);
+                }
+                yPos += 12;
+            }
+
+            // Schritt 2
+            if (learningProgress.completedPoints.includes(2) && learningProgress.answers['2_answers'].length > 0) {
+                if (yPos > 240) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 2: Franchise verstehen', leftMargin, yPos);
+                yPos += 10;
+
+                learningProgress.answers['2_answers'].forEach((answer, index) => {
+                    if (yPos > 260) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+
+                    doc.setTextColor(...blueColor);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(`Frage ${index + 1}:`, leftMargin, yPos);
+                    yPos += 6;
+                    
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFont(undefined, 'normal');
+                    yPos = addWrappedText(answer, yPos, maxWidth, 10);
+                    yPos += 6;
+                });
+                yPos += 6;
+            }
+
+            // Schritt 3
+            if (learningProgress.completedPoints.includes(3)) {
+                if (yPos > 220) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 3: Prämien vergleichen', leftMargin, yPos);
+                yPos += 10;
+
+                if (learningProgress.answers['3_franchise']) {
+                    doc.setTextColor(...blueColor);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('Gewählte Franchise:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['3_franchise'], yPos, maxWidth, 10);
+                    yPos += 6;
+                }
+
+                if (learningProgress.answers['3_cheapest']) {
+                    doc.setTextColor(...blueColor);
+                    doc.text('Günstigste Kasse:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['3_cheapest'], yPos, maxWidth, 10);
+                    yPos += 6;
+                }
+
+                if (learningProgress.answers['3_expensive']) {
+                    doc.setTextColor(...blueColor);
+                    doc.text('Teuerste Kasse:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['3_expensive'], yPos, maxWidth, 10);
+                    yPos += 6;
+                }
+
+                if (learningProgress.answers['3_merksatz']) {
+                    doc.setTextColor(...blueColor);
+                    doc.text('Merksatz:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['3_merksatz'], yPos, maxWidth, 10);
+                }
+                yPos += 10;
+            }
+
+            // Schritt 4
+            if (learningProgress.completedPoints.includes(4) && learningProgress.answers['4_alexa']) {
+                if (yPos > 240) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 4: Kostenberechnungen', leftMargin, yPos);
+                yPos += 10;
+
+                doc.setTextColor(...blueColor);
+                doc.setFontSize(11);
+                doc.text('Alexas Kostenberechnung:', leftMargin, yPos);
+                yPos += 6;
+                yPos = addWrappedText(learningProgress.answers['4_alexa'], yPos, maxWidth, 10);
+                yPos += 10;
+            }
+
+            // Schritt 5
+            if (learningProgress.completedPoints.includes(5) && learningProgress.answers['5_text']) {
+                if (yPos > 240) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 5: Zusatzversicherungen', leftMargin, yPos);
+                yPos += 10;
+
+                yPos = addWrappedText(learningProgress.answers['5_text'], yPos, maxWidth, 10);
+                yPos += 10;
+            }
+
+            // Schritt 6
+            if (learningProgress.completedPoints.includes(6)) {
+                if (yPos > 200) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text('Schritt 6: Abschlussübung', leftMargin, yPos);
+                yPos += 10;
+
+                if (learningProgress.answers['6_martina_a']) {
+                    doc.setTextColor(...blueColor);
+                    doc.setFontSize(11);
+                    doc.text('a) Kosten bei Franchise CHF 300:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['6_martina_a'], yPos, maxWidth, 10);
+                    yPos += 8;
+                }
+
+                if (learningProgress.answers['6_martina_b']) {
+                    doc.setTextColor(...blueColor);
+                    doc.text('b) Kosten bei Franchise CHF 2500:', leftMargin, yPos);
+                    yPos += 6;
+                    yPos = addWrappedText(learningProgress.answers['6_martina_b'], yPos, maxWidth, 10);
+                }
+            }
+
+            // Fußzeile auf jeder Seite
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(9);
+                doc.setTextColor(...grayColor);
+                doc.text(`Seite ${i} von ${pageCount}`, pageWidth / 2, 285, { align: 'center' });
+            }
+
             doc.save('Krankenkassen_Lernjournal.pdf');
         }
 
