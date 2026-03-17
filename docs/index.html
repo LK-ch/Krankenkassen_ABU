@@ -775,14 +775,27 @@
             doc.setTextColor(...blackColor);
             doc.setFontSize(10);
             doc.setFont(undefined, 'normal');
-            doc.text(`Gesundheitszustand: ${learningProgress.answers.health_status || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+
+            const healthMap = {
+                'gesund': 'Meistens gesund, max. 2x beim Arzt pro Jahr',
+                'mittel': '3–5x pro Jahr beim Arzt',
+                'oft': 'Oft beim Arzt / oft krank'
+            };
+            const savingsMap = {
+                '0': '0 CHF verfügbar',
+                '1000': 'Etwa 1000 CHF verfügbar',
+                '3000': '3000 CHF oder mehr verfügbar'
+            };
+            const healthVal = learningProgress.answers.health_status;
+            const savingsVal = learningProgress.answers.savings;
+            doc.text(`Gesundheitszustand: ${healthMap[healthVal] || '(nicht ausgefuellt)'}`, leftMargin, yPos);
             yPos += 6;
-            doc.text(`Ersparnisse: ${learningProgress.answers.savings || '(nicht ausgefuellt)'}`, leftMargin, yPos);
+            doc.text(`Ersparnisse: ${savingsMap[savingsVal] || '(nicht ausgefuellt)'}`, leftMargin, yPos);
             yPos += 6;
             doc.text(`Bisherige Gesundheitskosten: ${learningProgress.answers.past_costs || '(nicht ausgefuellt)'} CHF`, leftMargin, yPos);
             yPos += 12;
             
-            checkNewPage(25);
+            checkNewPage(50);
             
             // Fallbeispiele
             doc.setTextColor(...darkBlueColor);
@@ -793,12 +806,42 @@
             
             doc.setTextColor(...blackColor);
             doc.setFontSize(10);
+
+            // Fall 1
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall 1: Anna, 24 Jahre', leftMargin, yPos);
+            yPos += 5;
             doc.setFont(undefined, 'normal');
-            doc.text(`Fall 1 (Anna): ${learningProgress.answers.fall1_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
-            yPos += 6;
-            doc.text(`Fall 2 (Herr Meier): ${learningProgress.answers.fall2_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
-            yPos += 6;
-            doc.text(`Fall 3 (Sarah): ${learningProgress.answers.fall3_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            yPos = addWrappedText('Fitnesstrainerin, sehr sportlich, letztes Jahr 1x beim Arzt, 5000 CHF gespart, möchte Prämien sparen.', leftMargin, yPos, rightMargin - leftMargin);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Empfohlene Franchise: ${learningProgress.answers.fall1_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            doc.setFont(undefined, 'normal');
+            yPos += 10;
+
+            checkNewPage(25);
+
+            // Fall 2
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall 2: Herr Meier, 45 Jahre', leftMargin, yPos);
+            yPos += 5;
+            doc.setFont(undefined, 'normal');
+            yPos = addWrappedText('Hat Diabetes, ca. 8x pro Jahr beim Arzt, nur 500 CHF Notgroschen, mittleres Einkommen.', leftMargin, yPos, rightMargin - leftMargin);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Empfohlene Franchise: ${learningProgress.answers.fall2_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            doc.setFont(undefined, 'normal');
+            yPos += 10;
+
+            checkNewPage(25);
+
+            // Fall 3
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall 3: Sarah, 28 Jahre', leftMargin, yPos);
+            yPos += 5;
+            doc.setFont(undefined, 'normal');
+            yPos = addWrappedText('Grafikdesignerin, 3–4x pro Jahr beim Arzt, 2500 CHF gespart, sucht einen guten Mittelweg.', leftMargin, yPos, rightMargin - leftMargin);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Empfohlene Franchise: ${learningProgress.answers.fall3_franchise || '(nicht beantwortet)'} CHF`, leftMargin, yPos);
+            doc.setFont(undefined, 'normal');
             yPos += 12;
             
             checkNewPage(30);
